@@ -1158,3 +1158,53 @@ footer {
   opacity: 1;
   box-shadow: 0 0 25px currentColor;
 }
+/* 💓 ANIMACIÓN LATIDO */
+@keyframes neonPulse {
+  0% {
+    box-shadow: 0 0 6px currentColor, 0 0 12px currentColor;
+  }
+  50% {
+    box-shadow: 0 0 18px currentColor, 0 0 36px currentColor;
+  }
+  100% {
+    box-shadow: 0 0 6px currentColor, 0 0 12px currentColor;
+  }
+}
+
+/* aplicar a iconos */
+.social-link {
+  animation: neonPulse 2.5s infinite ease-in-out;
+}
+
+/* colores base para que funcione currentColor */
+.gmail { color: #ea4335; }
+.insta { color: #e1306c; }
+.tiktok { color: #25f4ee; }
+.x { color: #ffffff; }
+.twitch { color: #9146ff; }
+
+/* hover más fuerte encima del pulse */
+.social-link:hover {
+  animation: none;
+  transform: translateY(-4px) scale(1.1);
+}
+
+.gmail:hover {
+  box-shadow: 0 0 20px #ea4335, 0 0 40px #ea4335;
+}
+
+.insta:hover {
+  box-shadow: 0 0 20px #e1306c, 0 0 40px #fd1d1d;
+}
+
+.tiktok:hover {
+  box-shadow: 0 0 20px #25f4ee, 0 0 40px #fe2c55;
+}
+
+.x:hover {
+  box-shadow: 0 0 20px #ffffff, 0 0 40px #aaaaaa;
+}
+
+.twitch:hover {
+  box-shadow: 0 0 20px #9146ff, 0 0 40px #9146ff;
+}
