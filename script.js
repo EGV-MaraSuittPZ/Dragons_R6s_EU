@@ -3,10 +3,10 @@
 // ==========================================
 const matchesData = [
   {
-    opponent: "Giants Gaming",
-    opponentLogo: "logo.png", // Puedes cambiarlo por el logo del rival
+    opponent: "UDR",
+    opponentLogo: "UDR.png", // Puedes cambiarlo por el logo del rival
     ourScore: 7,
-    opponentScore: 5,
+    opponentScore: 0,
     status: "win",            // Puede ser: "win", "loss" o "upcoming"
     league: "esp",            // Puede ser: "esp", "liga2" o "liga3"
     leagueName: "Competición Española",
@@ -14,38 +14,49 @@ const matchesData = [
     date: "12 ABR, 2026"
   },
   {
-    opponent: "Wizards Esports",
-    opponentLogo: "logo.png",
-    ourScore: 3,
+    opponent: "YoungCracks",
+    opponentLogo: "yn.png",
+    ourScore: 8,
+    opponentScore: 6,
+    status: "win",
+    league: "esp",
+    leagueName: "Competición Española",
+    leagueLogo: "competicion_española.png",
+    date: "19 ABR, 2026"
+  },
+   {
+    opponent: "SCRAV",
+    opponentLogo: "scrav",
+    ourScore: 7,
+    opponentScore: 4,
+    status: "win",
+    league: "esp",
+    leagueName: "Competición Española",
+    leagueLogo: "competicion_española.png",
+    date: "25 ABR, 2026"
+  },
+   {
+    opponent: "(FW)ProdigiFive",
+    opponentLogo: "p5.png",
+    ourScore: 0,
     opponentScore: 7,
     status: "loss",
     league: "esp",
     leagueName: "Competición Española",
     leagueLogo: "competicion_española.png",
-    date: "20 ABR, 2026"
+    date: "1 MAY, 2026"
   },
-  {
-    opponent: "Team Secret",
-    opponentLogo: "logo.png",
+   {
+    opponent: "S.O.T",
+    opponentLogo: "sot.png",
     ourScore: 0,
     opponentScore: 0,
-    status: "upcoming",
-    league: "liga2",
-    leagueName: "Liga 2",
-    leagueLogo: "", // Si no tiene logo, se ocultará automáticamente gracias al HTML
-    date: "18 MAY, 2026"
+    status: "",
+    league: "esp",
+    leagueName: "Competición Española",
+    leagueLogo: "competicion_española.png",
+    date: "0 MAY, 2026"
   },
-  {
-    opponent: "Rogue",
-    opponentLogo: "logo.png",
-    ourScore: 7,
-    opponentScore: 2,
-    status: "win",
-    league: "liga3",
-    leagueName: "Liga 3",
-    leagueLogo: "",
-    date: "02 MAY, 2026"
-  }
 ];
 
 // ==========================================
@@ -55,7 +66,7 @@ let activeStatus = "all";
 let activeLeague = "all";
 
 // ==========================================
-// 3. FUNCIÓN PARA PINTAR LOS PARTIDOS EN PANTALLA
+// 3. FUNCIÓN PARA PINTAR LOS PARTIDOS EN PANTALLA 
 // ==========================================
 function renderMatches() {
   const container = document.getElementById("matches-list");
@@ -87,20 +98,20 @@ function renderMatches() {
     const matchCard = document.createElement("div");
     matchCard.className = `match-card ${match.status}`;
     
-    // Le aplicamos estilos en línea alineados con el look esport de tu web
+    // Contenedor principal de la tarjeta
     matchCard.style.cssText = `
       background: rgba(255, 255, 255, 0.02);
       border-left: 4px solid ${match.status === 'win' ? '#2ecc71' : match.status === 'loss' ? '#e74c3c' : '#3498db'};
       padding: 15px 20px;
       display: flex;
-      justify-content: space-between;
-      align-items: center;
+      flex-direction: column;
+      gap: 15px;
       border-radius: 4px;
       transition: all 0.3s ease;
     `;
 
     matchCard.innerHTML = `
-      <div style="display: flex; flex-direction: column; gap: 6px;">
+      <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 8px;">
         <div style="display: flex; align-items: center; gap: 8px;">
           ${match.leagueLogo ? `<img src="${match.leagueLogo}" alt="" style="height: 18px; width: auto; object-fit: contain;">` : ""}
           <span style="font-family: 'Share Tech Mono', monospace; font-size: 0.8rem; color: #888; text-transform: uppercase;">
@@ -112,23 +123,39 @@ function renderMatches() {
         </span>
       </div>
 
-      <div style="display: flex; align-items: center; gap: 20px; font-family: 'Barlow', sans-serif; font-weight: 600;">
-        <span style="color: #fff; letter-spacing: 0.5px;">DRAGONS</span>
-        <span style="background: rgba(255, 255, 255, 0.07); padding: 5px 12px; border-radius: 4px; font-family: 'Share Tech Mono', monospace; color: #fff; min-width: 45px; text-align: center;">
-          ${scoreText}
-        </span>
-        <span style="color: #aaa;">${match.opponent}</span>
+      <div class="match-versus-row" style="display: flex; justify-content: space-between; align-items: center; gap: 15px; width: 100%;">
+        
+        <div style="display: flex; align-items: center; gap: 12px; flex: 1; justify-content: flex-end; min-width: 0;">
+          <span style="color: #fff; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: clamp(1rem, 2vw, 1.3rem); letter-spacing: 0.5px; text-transform: uppercase; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+            DRAGONS
+          </span>
+          <img src="logo.png" alt="Dragons Logo" style="height: 35px; width: 35px; min-width: 35px; object-fit: contain;" onerror="this.style.display='none'">
+        </div>
+
+        <div style="display: flex; justify-content: center; min-width: 80px; flex-shrink: 0;">
+          <span style="background: rgba(255, 255, 255, 0.07); padding: 6px 16px; border-radius: 4px; font-family: 'Share Tech Mono', monospace; color: #fff; font-weight: bold; font-size: clamp(1rem, 2vw, 1.2rem); text-align: center; border: 1px solid rgba(255,255,255,0.1);">
+            ${scoreText}
+          </span>
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 12px; flex: 1; justify-content: flex-start; min-width: 0;">
+          <img src="${match.opponentLogo}" alt="${match.opponent}" style="height: 35px; width: 35px; min-width: 35px; object-fit: contain;" onerror="this.style.display='none'">
+          <span style="color: #aaa; font-family: 'Barlow Condensed', sans-serif; font-weight: 600; font-size: clamp(1rem, 2vw, 1.3rem); letter-spacing: 0.5px; text-transform: uppercase; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+            ${match.opponent}
+          </span>
+        </div>
+
       </div>
     `;
 
-    // Efecto Hover táctil/ratón
+    // Efecto Hover
     matchCard.addEventListener("mouseenter", () => {
       matchCard.style.background = "rgba(255, 255, 255, 0.05)";
-      matchCard.style.transform = "translateX(5px)";
+      matchCard.style.transform = "translateY(-2px)";
     });
     matchCard.addEventListener("mouseleave", () => {
       matchCard.style.background = "rgba(255, 255, 255, 0.02)";
-      matchCard.style.transform = "translateX(0)";
+      matchCard.style.transform = "translateY(0)";
     });
 
     container.appendChild(matchCard);
@@ -165,7 +192,6 @@ document.addEventListener("DOMContentLoaded", () => {
   // Render inicial al cargar la página
   renderMatches();
 });
-
 
 // ==========================================
 // 5. MENÚ RESPONSIVE (Función toggleMenu de tu HTML)
