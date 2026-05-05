@@ -1092,3 +1092,69 @@ footer {
   .footer-right p { text-align: center; }
   .footer-links { justify-content: center; }
 }
+.neon-socials {
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+  margin-top: 25px;
+}
+
+.social-link {
+  width: 52px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.05);
+  transition: 0.3s;
+  position: relative;
+}
+
+.social-link svg {
+  width: 24px;
+  height: 24px;
+  fill: white;
+  transition: 0.3s;
+}
+
+/* 🔥 EFECTO NEÓN BASE */
+.social-link:hover {
+  transform: translateY(-4px) scale(1.08);
+}
+
+/* COLORES + GLOW PERSONALIZADO */
+.gmail:hover {
+  box-shadow: 0 0 12px #ea4335, 0 0 24px #ea4335;
+}
+
+.insta:hover {
+  box-shadow: 0 0 12px #e1306c, 0 0 24px #fd1d1d;
+}
+
+.tiktok:hover {
+  box-shadow: 0 0 12px #25f4ee, 0 0 24px #fe2c55;
+}
+
+.x:hover {
+  box-shadow: 0 0 12px #ffffff, 0 0 24px #aaaaaa;
+}
+
+.twitch:hover {
+  box-shadow: 0 0 12px #9146ff, 0 0 24px #9146ff;
+}
+
+/* glow animado suave */
+.social-link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 12px;
+  opacity: 0;
+  transition: 0.3s;
+}
+
+.social-link:hover::after {
+  opacity: 1;
+  box-shadow: 0 0 25px currentColor;
+}
