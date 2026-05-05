@@ -15,9 +15,10 @@
   --border:   rgba(255,255,255,0.07);
   --border2:  rgba(255,255,255,0.14);
 
-  --accent:   #e8c94b;   /* gold */
-  --accent2:  #c8a82b;
-  --accent-glow: rgba(232,201,75,0.25);
+  --accent:   #39ff14;   /* Verde Neón Eléctrico */
+  --accent2:  #2ee60f;   /* Verde Neón más oscuro para sombras/bordes */
+  --accent-glow: rgba(57, 255, 20, 0.35); /* Glow de verde neón */
+   
   --red:      #e84b4b;
   --green:    #4be88a;
   --blue:     #4ba3e8;
