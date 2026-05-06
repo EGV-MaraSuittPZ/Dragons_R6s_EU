@@ -1262,3 +1262,107 @@ footer {
   height: 40px;
   background: rgba(255,255,255,0.1);
 }
+
+/* ── ALIANZAS ─────────────────────────────── */
+#alianzas {
+  padding: 100px 0;
+  background: var(--bg2);
+}
+
+.alianzas-intro {
+  color: var(--text2);
+  font-size: 1rem;
+  margin-bottom: 3rem;
+  max-width: 600px;
+}
+
+.alianzas-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.alianza-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  padding: 20px;
+  border-radius: var(--rad);
+  transition: all var(--tr);
+}
+.alianza-card:hover {
+  background: var(--bg4);
+  border-left-color: var(--accent2);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(57, 255, 20, 0.08);
+}
+
+.alianza-logo {
+  width: 56px;
+  height: 56px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 1.5px solid var(--accent);
+  background: var(--bg3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.alianza-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.alianza-initials {
+  font-family: var(--font-title);
+  font-size: 1.4rem;
+  font-weight: 900;
+  color: var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.alianza-info {
+  flex: 1;
+  min-width: 0;
+}
+.alianza-tag {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 4px;
+}
+.alianza-name {
+  font-family: var(--font-title);
+  font-size: 1.3rem;
+  font-weight: 900;
+  color: var(--text);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 6px;
+}
+.alianza-desc {
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  color: var(--text2);
+  line-height: 1.5;
+  margin-bottom: 10px;
+}
+.alianza-link {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  transition: opacity var(--tr);
+}
+.alianza-link:hover { opacity: 0.7; }
