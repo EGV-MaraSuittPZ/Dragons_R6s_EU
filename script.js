@@ -38,14 +38,14 @@ const matchesData = [
 //  ROSTER — edita aquí
 // ==========================================
 const rosterData = [
-  { name: "Kny",     role: "jugador",   position: "Entry Fragger", photo: "Logos/kny.png" },
-  { name: "Rzn",     role: "jugador",   position: "Support",       photo: "Logos/rzn.png" },
-  { name: "GG",      role: "jugador",   position: "IGL",           photo: "Logos/gg"      },
-  { name: "Masta",   role: "jugador",   position: "Roamer",        photo: ""              },
-  { name: "Luinox",  role: "jugador",   position: "Rifler",        photo: ""              },
-  { name: "Coach",   role: "staff",     position: "Head Coach",    photo: ""              },
-  { name: "Manager", role: "staff",     position: "Team Manager",  photo: ""              },
-  { name: "ddragonns", role: "streamer", position: "Streamer",     photo: ""              },
+  { name: "Kny",       role: "jugador",   position: "Entry Fragger", photo: "" },
+  { name: "Rzn",       role: "jugador",   position: "Support",       photo: "" },
+  { name: "GG",        role: "jugador",   position: "IGL",           photo: "" },
+  { name: "Masta",     role: "jugador",   position: "Roamer",        photo: "" },
+  { name: "Luinox",    role: "jugador",   position: "Rifler",        photo: "" },
+  { name: "Coach",     role: "staff",     position: "Head Coach",    photo: "" },
+  { name: "Manager",   role: "staff",     position: "Team Manager",  photo: "" },
+  { name: "ddragonns", role: "streamer",  position: "Streamer",      photo: "" },
 ];
 
 // ==========================================
