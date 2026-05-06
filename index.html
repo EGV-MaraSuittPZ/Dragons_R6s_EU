@@ -48,15 +48,28 @@
 </nav>
 
 <!-- HERO -->
-<section id="hero">
-  <canvas id="hero-canvas"></canvas>
-  <div class="hero-overlay"></div>
+<!-- Estadísticas del hero (dentro de #hero) -->
+<div class="hero-record">
+  <div class="rec-item">
+    <span class="rec-num" id="rec-wins">0</span>
+    <span class="rec-label">Victorias</span>
+  </div>
+  <div class="rec-sep"></div>
+  <div class="rec-item">
+    <span class="rec-num" id="rec-losses">0</span>
+    <span class="rec-label">Derrotas</span>
+  </div>
+  <div class="rec-sep"></div>
+  <div class="rec-item">
+    <span class="rec-num" id="rec-wr">0%</span>
+    <span class="rec-label">Win Rate</span>
+  </div>
+</div>
 
-  <div class="hero-content">
-    <div class="hero-eyebrow">
-      <span class="eyebrow-dot"></span>
-      <span id="hero-eyebrow-text">RAINBOW SIX SIEGE · ESPORTS</span>
-    </div>
+<!-- Ticker bar (al final de #hero, antes de cerrar la sección) -->
+<div class="hero-ticker-bar">
+  <div class="ticker-track" id="ticker-inner"></div>
+</div>
 
     <h1 class="hero-title">
       <span id="hero-team-name">DRAGONS</span>
