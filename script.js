@@ -26,7 +26,7 @@ const matchesData = [
   },
   {
     opponent: "SCRAV",
-    opponentLogo: "Logos\scrav",
+    opponentLogo: "Logos\scrav.png",
     ourScore: 7,
     opponentScore: 4,
     status: "win",
@@ -36,8 +36,8 @@ const matchesData = [
     date: "25 ABR, 2026"
   },
   {
-    opponent: "Logos\YoungCracks",
-    opponentLogo: "yn.png",
+    opponent: "YoungCracks",
+    opponentLogo: "Logos\yn.png",
     ourScore: 8,
     opponentScore: 6,
     status: "win",
@@ -48,7 +48,7 @@ const matchesData = [
   },
   {
     opponent: "UDR",
-    opponentLogo: "Logos\UDR.png", // Puedes cambiarlo por el logo del rival
+    opponentLogo: "Logos\udr.png", // Puedes cambiarlo por el logo del rival
     ourScore: 7,
     opponentScore: 0,
     status: "win",            // Puede ser: "win", "loss" o "upcoming"
