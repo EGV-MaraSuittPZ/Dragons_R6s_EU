@@ -1,60 +1,58 @@
 // ==========================================
-//  PARTIDOS — edita solo aquí
+//  PARTIDOS — edita aquí
 // ==========================================
 const matchesData = [
   {
-    opponent: "S.O.T",
-    opponentLogo: "Logos/sot.png",
-    ourScore: 0, opponentScore: 0,
-    status: "upcoming",
+    opponent: "S.O.T", opponentLogo: "Logos/sot.png",
+    ourScore: 0, opponentScore: 0, status: "upcoming",
     league: "esp", leagueName: "Competición Española",
     leagueLogo: "competicion_española.png", date: "0 MAY, 2026"
   },
   {
-    opponent: "(FW)ProdigiFive",
-    opponentLogo: "Logos/p5.png",
-    ourScore: 0, opponentScore: 7,
-    status: "loss",
+    opponent: "(FW)ProdigiFive", opponentLogo: "Logos/p5.png",
+    ourScore: 0, opponentScore: 7, status: "loss",
     league: "esp", leagueName: "Competición Española",
     leagueLogo: "competicion_española.png", date: "1 MAY, 2026"
   },
   {
-    opponent: "SCRAV",
-    opponentLogo: "Logos/scrav.png",
-    ourScore: 7, opponentScore: 4,
-    status: "win",
+    opponent: "SCRAV", opponentLogo: "Logos/scrav.png",
+    ourScore: 7, opponentScore: 4, status: "win",
     league: "esp", leagueName: "Competición Española",
     leagueLogo: "competicion_española.png", date: "25 ABR, 2026"
   },
   {
-    opponent: "YoungCracks",
-    opponentLogo: "Logos/yn.png",
-    ourScore: 8, opponentScore: 6,
-    status: "win",
+    opponent: "YoungCracks", opponentLogo: "Logos/yn.png",
+    ourScore: 8, opponentScore: 6, status: "win",
     league: "esp", leagueName: "Competición Española",
     leagueLogo: "competicion_española.png", date: "19 ABR, 2026"
   },
   {
-    opponent: "UDR",
-    opponentLogo: "Logos/udr.png",
-    ourScore: 7, opponentScore: 0,
-    status: "win",
+    opponent: "UDR", opponentLogo: "Logos/udr.png",
+    ourScore: 7, opponentScore: 0, status: "win",
     league: "esp", leagueName: "Competición Española",
     leagueLogo: "competicion_española.png", date: "12 ABR, 2026"
   },
 ];
 
 // ==========================================
+//  ROSTER — edita aquí
+// ==========================================
+const rosterData = [
+  { name: "Kny",     role: "jugador",   position: "Entry Fragger", photo: "Logos/kny.png" },
+  { name: "Rzn",     role: "jugador",   position: "Support",       photo: "Logos/rzn.png" },
+  { name: "GG",      role: "jugador",   position: "IGL",           photo: "Logos/gg"      },
+  { name: "Masta",   role: "jugador",   position: "Roamer",        photo: ""              },
+  { name: "Luinox",  role: "jugador",   position: "Rifler",        photo: ""              },
+  { name: "Coach",   role: "staff",     position: "Head Coach",    photo: ""              },
+  { name: "Manager", role: "staff",     position: "Team Manager",  photo: ""              },
+  { name: "ddragonns", role: "streamer", position: "Streamer",     photo: ""              },
+];
+
+// ==========================================
 //  SPONSORS — edita aquí
 // ==========================================
 const sponsorsData = [
-  {
-    name: "-",
-    logo: "",
-    description: "-",
-    link: "",
-    tag: "Patrocinador Principal"
-  },
+  { name: "-", logo: "", description: "-", link: "", tag: "Patrocinador Principal" },
 ];
 
 // ==========================================
@@ -67,105 +65,42 @@ let activeLeague = "all";
 //  MENÚ RESPONSIVE
 // ==========================================
 function toggleMenu() {
-  const mobileNav = document.getElementById("nav-mobile");
-  const hamburger = document.getElementById("hamburger");
-  if (mobileNav && hamburger) {
-    mobileNav.classList.toggle("open");
-    hamburger.classList.toggle("active");
-  }
+  const nav = document.getElementById("nav-mobile");
+  const ham = document.getElementById("hamburger");
+  if (nav && ham) { nav.classList.toggle("open"); ham.classList.toggle("active"); }
 }
 
 // ==========================================
-//  TODO EN UN SOLO DOMContentLoaded
+//  ROSTER: filtro + render
 // ==========================================
-document.addEventListener("DOMContentLoaded", () => {
+function filterRoster(btn, role) {
+  document.querySelectorAll(".role-tab").forEach(b => b.classList.remove("active"));
+  btn.classList.add("active");
+  renderRoster(role);
+}
 
-  // ── 1. ESTADÍSTICAS AUTOMÁTICAS ─────────
-  const jugados   = matchesData.filter(m => m.status === "win" || m.status === "loss");
-  const victorias = jugados.filter(m => m.status === "win").length;
-  const derrotas  = jugados.filter(m => m.status === "loss").length;
-  const winRate   = jugados.length > 0
-    ? Math.round((victorias / jugados.length) * 100) : 0;
+function renderRoster(role = "all") {
+  const grid = document.getElementById("roster-grid");
+  if (!grid) return;
 
-  function contar(elId, hasta, sufijo = "") {
-    const el = document.getElementById(elId);
-    if (!el) return;
-    const inicio = performance.now();
-    const dur = 1800;
-    (function paso(ahora) {
-      const t = Math.min((ahora - inicio) / dur, 1);
-      const ease = 1 - Math.pow(1 - t, 3);
-      el.textContent = Math.floor(ease * hasta) + sufijo;
-      if (t < 1) requestAnimationFrame(paso);
-    })(inicio);
-  }
+  const filtered = role === "all" ? rosterData : rosterData.filter(p => p.role === role);
 
-  contar("rec-wins",    victorias);
-  contar("rec-losses",  derrotas);
-  contar("rec-wr",      winRate, "%");
-  contar("rec-players", 5);
-
-  // ── 2. TICKER AUTOMÁTICO ─────────────────
-  const ticker = document.getElementById("ticker-inner");
-  if (ticker) {
-    const items = matchesData.map(m => {
-      if (m.status === "upcoming")
-        return `PRÓXIMO: DRAGONS vs ${m.opponent.toUpperCase()} (${m.date})`;
-      if (m.status === "win")
-        return `✓ DRAGONS ${m.ourScore} - ${m.opponentScore} ${m.opponent.toUpperCase()}`;
-      return `✗ DRAGONS ${m.ourScore} - ${m.opponentScore} ${m.opponent.toUpperCase()}`;
-    });
-    const text = items.join("   ///   ") + "   ///   ";
-    ticker.textContent = text + text; // duplicado para loop sin salto
-  }
-
-  // ── 3. SPONSORS ──────────────────────────
-  const sponsorsGrid = document.getElementById("sponsors-grid");
-  if (sponsorsGrid) {
-    sponsorsGrid.innerHTML = sponsorsData.map(s => `
-      <div class="sponsor-card">
-        <div class="sponsor-logo">
-          ${s.logo ? `<img src="${s.logo}" alt="${s.name}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">` : ""}
-          <span class="sponsor-initials" style="${s.logo ? 'display:none' : ''}">
-            ${s.name.charAt(0)}
-          </span>
-        </div>
-        <div class="sponsor-info">
-          <div class="sponsor-tag">${s.tag}</div>
-          <h3 class="sponsor-name">${s.name}</h3>
-          <p class="sponsor-desc">${s.description}</p>
-          ${s.link ? `<a href="${s.link}" target="_blank" class="sponsor-link">Visitar →</a>` : ""}
-        </div>
+  grid.innerHTML = filtered.map(p => `
+    <div class="roster-card" data-role="${p.role}">
+      <div class="rc-photo">
+        ${p.photo
+          ? `<img src="${p.photo}" alt="${p.name}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">`
+          : ""}
+        <span class="rc-initials" style="${p.photo ? 'display:none' : ''}">${p.name.charAt(0)}</span>
       </div>
-    `).join("");
-  }
-
-  // ── 4. PARTIDOS ───────────────────────────
-  renderMatches();
-
-  // Filtros de estado
-  document.querySelectorAll("#status-filters .res-filter").forEach(btn => {
-    btn.addEventListener("click", () => {
-      document.querySelectorAll("#status-filters .res-filter")
-        .forEach(b => b.classList.remove("active"));
-      btn.classList.add("active");
-      activeStatus = btn.getAttribute("data-status");
-      renderMatches();
-    });
-  });
-
-  // Filtros de liga
-  document.querySelectorAll("#league-filters .res-filter").forEach(btn => {
-    btn.addEventListener("click", () => {
-      document.querySelectorAll("#league-filters .res-filter")
-        .forEach(b => b.classList.remove("active"));
-      btn.classList.add("active");
-      activeLeague = btn.getAttribute("data-league");
-      renderMatches();
-    });
-  });
-
-});
+      <div class="rc-info">
+        <span class="rc-role-badge">${p.role}</span>
+        <span class="rc-name">${p.name}</span>
+        <span class="rc-position">${p.position}</span>
+      </div>
+    </div>
+  `).join("");
+}
 
 // ==========================================
 //  RENDER PARTIDOS
@@ -173,7 +108,6 @@ document.addEventListener("DOMContentLoaded", () => {
 function renderMatches() {
   const container = document.getElementById("matches-list");
   if (!container) return;
-
   container.innerHTML = "";
 
   const filtered = matchesData.filter(m => {
@@ -184,14 +118,13 @@ function renderMatches() {
 
   if (filtered.length === 0) {
     container.innerHTML = `<div style="text-align:center;color:#888;padding:40px;
-      font-family:'Share Tech Mono',monospace;">
-      No hay partidos con este filtro.</div>`;
+      font-family:'Share Tech Mono',monospace;">No hay partidos con este filtro.</div>`;
     return;
   }
 
   filtered.forEach(match => {
-    const isUpcoming = match.status === "upcoming";
-    const scoreText  = isUpcoming ? "VS" : `${match.ourScore} - ${match.opponentScore}`;
+    const isUpcoming  = match.status === "upcoming";
+    const scoreText   = isUpcoming ? "VS" : `${match.ourScore} - ${match.opponentScore}`;
     const borderColor = match.status === "win" ? "#2ecc71"
                       : match.status === "loss" ? "#e74c3c" : "#3498db";
 
@@ -244,3 +177,90 @@ function renderMatches() {
     container.appendChild(card);
   });
 }
+
+// ==========================================
+//  ARRANCA TODO — UN SOLO DOMContentLoaded
+// ==========================================
+document.addEventListener("DOMContentLoaded", () => {
+
+  // Estadísticas automáticas
+  const jugados   = matchesData.filter(m => m.status === "win" || m.status === "loss");
+  const victorias = jugados.filter(m => m.status === "win").length;
+  const derrotas  = jugados.filter(m => m.status === "loss").length;
+  const winRate   = jugados.length > 0 ? Math.round((victorias / jugados.length) * 100) : 0;
+
+  function contar(elId, hasta, sufijo = "") {
+    const el = document.getElementById(elId);
+    if (!el) return;
+    const inicio = performance.now();
+    const dur = 1800;
+    (function paso(ahora) {
+      const t = Math.min((ahora - inicio) / dur, 1);
+      const ease = 1 - Math.pow(1 - t, 3);
+      el.textContent = Math.floor(ease * hasta) + sufijo;
+      if (t < 1) requestAnimationFrame(paso);
+    })(inicio);
+  }
+  contar("rec-wins",    victorias);
+  contar("rec-losses",  derrotas);
+  contar("rec-wr",      winRate, "%");
+  contar("rec-players", rosterData.filter(p => p.role === "jugador").length);
+
+  // Ticker automático
+  const ticker = document.getElementById("ticker-inner");
+  if (ticker) {
+    const items = matchesData.map(m => {
+      if (m.status === "upcoming") return `PRÓXIMO: DRAGONS vs ${m.opponent.toUpperCase()} (${m.date})`;
+      if (m.status === "win")      return `✓ DRAGONS ${m.ourScore} - ${m.opponentScore} ${m.opponent.toUpperCase()}`;
+      return `✗ DRAGONS ${m.ourScore} - ${m.opponentScore} ${m.opponent.toUpperCase()}`;
+    });
+    const text = items.join("   ///   ") + "   ///   ";
+    ticker.textContent = text + text;
+  }
+
+  // Sponsors
+  const sponsorsGrid = document.getElementById("sponsors-grid");
+  if (sponsorsGrid) {
+    sponsorsGrid.innerHTML = sponsorsData.map(s => `
+      <div class="sponsor-card">
+        <div class="sponsor-logo">
+          ${s.logo ? `<img src="${s.logo}" alt="${s.name}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">` : ""}
+          <span class="sponsor-initials" style="${s.logo ? 'display:none' : ''}">${s.name.charAt(0)}</span>
+        </div>
+        <div class="sponsor-info">
+          <div class="sponsor-tag">${s.tag}</div>
+          <h3 class="sponsor-name">${s.name}</h3>
+          <p class="sponsor-desc">${s.description}</p>
+          ${s.link ? `<a href="${s.link}" target="_blank" class="sponsor-link">Visitar →</a>` : ""}
+        </div>
+      </div>
+    `).join("");
+  }
+
+  // Roster inicial
+  renderRoster("all");
+
+  // Partidos iniciales
+  renderMatches();
+
+  // Filtros de estado
+  document.querySelectorAll("#status-filters .res-filter").forEach(btn => {
+    btn.addEventListener("click", () => {
+      document.querySelectorAll("#status-filters .res-filter").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      activeStatus = btn.getAttribute("data-status");
+      renderMatches();
+    });
+  });
+
+  // Filtros de liga
+  document.querySelectorAll("#league-filters .res-filter").forEach(btn => {
+    btn.addEventListener("click", () => {
+      document.querySelectorAll("#league-filters .res-filter").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      activeLeague = btn.getAttribute("data-league");
+      renderMatches();
+    });
+  });
+
+});
