@@ -4,7 +4,7 @@
 const matchesData = [
   {
     opponent: "S.O.T",
-    opponentLogo: "sot.png",
+    opponentLogo: "Logos\sot.png",
     ourScore: 0,
     opponentScore: 0,
     status: "",
@@ -15,7 +15,7 @@ const matchesData = [
   },
   {
     opponent: "(FW)ProdigiFive",
-    opponentLogo: "p5.png",
+    opponentLogo: "Logos\p5.png",
     ourScore: 0,
     opponentScore: 7,
     status: "loss",
@@ -26,7 +26,7 @@ const matchesData = [
   },
   {
     opponent: "SCRAV",
-    opponentLogo: "scrav",
+    opponentLogo: "Logos\scrav",
     ourScore: 7,
     opponentScore: 4,
     status: "win",
@@ -36,7 +36,7 @@ const matchesData = [
     date: "25 ABR, 2026"
   },
   {
-    opponent: "YoungCracks",
+    opponent: "Logos\YoungCracks",
     opponentLogo: "yn.png",
     ourScore: 8,
     opponentScore: 6,
@@ -48,7 +48,7 @@ const matchesData = [
   },
   {
     opponent: "UDR",
-    opponentLogo: "UDR.png", // Puedes cambiarlo por el logo del rival
+    opponentLogo: "Logos\UDR.png", // Puedes cambiarlo por el logo del rival
     ourScore: 7,
     opponentScore: 0,
     status: "win",            // Puede ser: "win", "loss" o "upcoming"
