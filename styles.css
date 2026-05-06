@@ -1202,3 +1202,63 @@ footer {
 .twitch:hover {
   box-shadow: 0 0 20px #9146ff, 0 0 40px #9146ff;
 }
+
+/* ── TICKER ─────────────────────────────────── */
+.hero-ticker-bar {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  background: rgba(57, 255, 20, 0.08);
+  border-top: 1px solid rgba(57, 255, 20, 0.2);
+  border-bottom: 1px solid rgba(57, 255, 20, 0.2);
+  padding: 8px 0;
+  overflow: hidden;
+  z-index: 10;
+}
+
+.ticker-track {
+  display: inline-block;
+  white-space: nowrap;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.85rem;
+  color: rgba(57, 255, 20, 0.8);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  animation: ticker-scroll 40s linear infinite;
+}
+
+@keyframes ticker-scroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ── ESTADÍSTICAS HERO ──────────────────────── */
+.hero-record {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  margin: 1.5rem 0 2rem;
+}
+.rec-item {
+  display: flex;
+  flex-direction: column;
+}
+.rec-num {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #39ff14;
+  line-height: 1;
+}
+.rec-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #9aa0a8;
+  margin-top: 4px;
+}
+.rec-sep {
+  width: 1px;
+  height: 40px;
+  background: rgba(255,255,255,0.1);
+}
