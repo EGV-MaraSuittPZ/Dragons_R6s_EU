@@ -38,14 +38,14 @@ const matchesData = [
 //  ROSTER — edita aquí
 // ==========================================
 const rosterData = [
-  { name: "Kny",       role: "jugador",   position: "Entry Fragger", photo: "" },
-  { name: "Rzn",       role: "jugador",   position: "Support",       photo: "" },
-  { name: "GG",        role: "jugador",   position: "IGL",           photo: "" },
-  { name: "Masta",     role: "jugador",   position: "Roamer",        photo: "" },
-  { name: "Luinox",    role: "jugador",   position: "Rifler",        photo: "" },
-  { name: "Coach",     role: "staff",     position: "Head Coach",    photo: "" },
-  { name: "Manager",   role: "staff",     position: "Team Manager",  photo: "" },
-  { name: "ddragonns", role: "streamer",  position: "Streamer",      photo: "" },
+  { name: "WZA-copeete",       role: ["jugador", "staff"],   position: "IGL", photo: "" },
+  { name: "MaraSuitt_PZ",       role: ["jugador", "staff"],   position: "Support",       photo: "" },
+  { name: "GwrciaRetun",       role: ["jugador", "staff"],   position: "FLEX",           photo: "" },
+  { name: "Xx_Druiazul",     role: ["jugador", "staff"],   position: "IGL",        photo: "" },
+  { name: "GABYBEBEE",    role: "jugador",   position: "Support",        photo: "" },
+  { name: "qSxntxxx",     role: "jugador",     position: "",    photo: "" },
+  { name: "",   role: "staff",     position: "Team Manager",  photo: "" },
+  { name: "", role: "streamer",  position: "Streamer",      photo: "" },
 ];
 
 // ==========================================
