@@ -59,6 +59,35 @@ const matchesData = [
   }, 
 ];
 
+document.addEventListener("DOMContentLoaded", () => {
+
+  // 1. Filtra solo partidos jugados (excluye próximos)
+  const jugados  = matchesData.filter(m => m.status === "win" || m.status === "loss");
+  const victorias = jugados.filter(m => m.status === "win").length;
+  const derrotas  = jugados.filter(m => m.status === "loss").length;
+  const winRate   = jugados.length > 0
+    ? Math.round((victorias / jugados.length) * 100)
+    : 0;
+
+  // 2. Anima cada número desde 0 hasta su valor real
+  function contar(elId, hasta, sufijo = "") {
+    const el = document.getElementById(elId);
+    if (!el) return;
+    const inicio = performance.now();
+    const dur    = 1800; // milisegundos de animación
+    (function paso(ahora) {
+      const t    = Math.min((ahora - inicio) / dur, 1);
+      const ease = 1 - Math.pow(1 - t, 3); // easeOutCubic
+      el.textContent = Math.floor(ease * hasta) + sufijo;
+      if (t < 1) requestAnimationFrame(paso);
+    })(inicio);
+  }
+
+  contar("rec-wins",   victorias);
+  contar("rec-losses", derrotas);
+  contar("rec-wr",     winRate, "%");
+
+});
 // ==========================================
 // 2. ESTADO DE LOS FILTROS ACTIVOS
 // ==========================================
