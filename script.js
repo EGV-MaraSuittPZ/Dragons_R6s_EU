@@ -1,282 +1,70 @@
 // ==========================================
-// 1. BASE DE DATOS DE PARTIDOS (Añade o edita aquí)
+//  PARTIDOS — edita solo aquí
 // ==========================================
 const matchesData = [
   {
     opponent: "S.O.T",
-    opponentLogo: "Logos\sot.png",
-    ourScore: 0,
-    opponentScore: 0,
-    status: "",
-    league: "esp",
-    leagueName: "Competición Española",
-    leagueLogo: "competicion_española.png",
-    date: "0 MAY, 2026"
+    opponentLogo: "Logos/sot.png",
+    ourScore: 0, opponentScore: 0,
+    status: "upcoming",
+    league: "esp", leagueName: "Competición Española",
+    leagueLogo: "competicion_española.png", date: "0 MAY, 2026"
   },
   {
     opponent: "(FW)ProdigiFive",
-    opponentLogo: "Logos\p5.png",
-    ourScore: 0,
-    opponentScore: 7,
+    opponentLogo: "Logos/p5.png",
+    ourScore: 0, opponentScore: 7,
     status: "loss",
-    league: "esp",
-    leagueName: "Competición Española",
-    leagueLogo: "competicion_española.png",
-    date: "1 MAY, 2026"
+    league: "esp", leagueName: "Competición Española",
+    leagueLogo: "competicion_española.png", date: "1 MAY, 2026"
   },
   {
     opponent: "SCRAV",
-    opponentLogo: "Logos\scrav.png",
-    ourScore: 7,
-    opponentScore: 4,
+    opponentLogo: "Logos/scrav.png",
+    ourScore: 7, opponentScore: 4,
     status: "win",
-    league: "esp",
-    leagueName: "Competición Española",
-    leagueLogo: "competicion_española.png",
-    date: "25 ABR, 2026"
+    league: "esp", leagueName: "Competición Española",
+    leagueLogo: "competicion_española.png", date: "25 ABR, 2026"
   },
   {
     opponent: "YoungCracks",
-    opponentLogo: "Logos\yn.png",
-    ourScore: 8,
-    opponentScore: 6,
+    opponentLogo: "Logos/yn.png",
+    ourScore: 8, opponentScore: 6,
     status: "win",
-    league: "esp",
-    leagueName: "Competición Española",
-    leagueLogo: "competicion_española.png",
-    date: "19 ABR, 2026"
+    league: "esp", leagueName: "Competición Española",
+    leagueLogo: "competicion_española.png", date: "19 ABR, 2026"
   },
   {
     opponent: "UDR",
-    opponentLogo: "Logos\udr.png", // Puedes cambiarlo por el logo del rival
-    ourScore: 7,
-    opponentScore: 0,
-    status: "win",            // Puede ser: "win", "loss" o "upcoming"
-    league: "esp",            // Puede ser: "esp", "liga2" o "liga3"
-    leagueName: "Competición Española",
-    leagueLogo: "competicion_española.png",
-    date: "12 ABR, 2026"
-  }, 
+    opponentLogo: "Logos/udr.png",
+    ourScore: 7, opponentScore: 0,
+    status: "win",
+    league: "esp", leagueName: "Competición Española",
+    leagueLogo: "competicion_española.png", date: "12 ABR, 2026"
+  },
 ];
 
-document.addEventListener("DOMContentLoaded", () => {
-
-  // 1. Filtra solo partidos jugados (excluye próximos)
-  const jugados  = matchesData.filter(m => m.status === "win" || m.status === "loss");
-  const victorias = jugados.filter(m => m.status === "win").length;
-  const derrotas  = jugados.filter(m => m.status === "loss").length;
-  const winRate   = jugados.length > 0
-    ? Math.round((victorias / jugados.length) * 100)
-    : 0;
-
-  // 2. Anima cada número desde 0 hasta su valor real
-  function contar(elId, hasta, sufijo = "") {
-    const el = document.getElementById(elId);
-    if (!el) return;
-    const inicio = performance.now();
-    const dur    = 1800; // milisegundos de animación
-    (function paso(ahora) {
-      const t    = Math.min((ahora - inicio) / dur, 1);
-      const ease = 1 - Math.pow(1 - t, 3); // easeOutCubic
-      el.textContent = Math.floor(ease * hasta) + sufijo;
-      if (t < 1) requestAnimationFrame(paso);
-    })(inicio);
-  }
-
-  contar("rec-wins",   victorias);
-  contar("rec-losses", derrotas);
-  contar("rec-wr",     winRate, "%");
-
-});
-
-
 // ==========================================
-//  DATOS DE SPONSORS — edita aquí
+//  SPONSORS — edita aquí
 // ==========================================
 const sponsorsData = [
   {
     name: "Nombre del Sponsor",
-    logo: "Logos/sponsor1.png",  // ruta al logo, o "" si no tienes
-    description: "Breve descripción del sponsor o tipo de colaboración.",
-    link: "https://web-del-sponsor.com",
-    tag: "Patrocinador Principal"
-  },
-  {
-    name: "Otro Sponsor",
     logo: "",
-    description: "Segunda empresa o marca colaboradora.",
+    description: "Breve descripción del sponsor o colaboración.",
     link: "",
-    tag: "Colaborador"
+    tag: "Patrocinador Principal"
   },
 ];
 
 // ==========================================
-//  RENDER SPONSORS
-// ==========================================
-function renderSponsors() {
-  const grid = document.getElementById("sponsors-grid");
-  if (!grid) return;
-
-  grid.innerHTML = sponsorsData.map(s => `
-    <div class="sponsor-card">
-      <div class="sponsor-logo">
-        ${s.logo
-          ? `<img src="${s.logo}" alt="${s.name}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">`
-          : ""}
-        <span class="sponsor-initials" style="${s.logo ? 'display:none' : ''}">
-          ${s.name.charAt(0)}
-        </span>
-      </div>
-      <div class="sponsor-info">
-        <div class="sponsor-tag">${s.tag}</div>
-        <h3 class="sponsor-name">${s.name}</h3>
-        <p class="sponsor-desc">${s.description}</p>
-        ${s.link ? `<a href="${s.link}" target="_blank" class="sponsor-link">Visitar →</a>` : ""}
-      </div>
-    </div>
-  `).join("");
-}
-
-document.addEventListener("DOMContentLoaded", () => {
-  renderSponsors();
-  // ... tus otras funciones
-});
-// ==========================================
-// 2. ESTADO DE LOS FILTROS ACTIVOS
+//  ESTADO FILTROS
 // ==========================================
 let activeStatus = "all";
 let activeLeague = "all";
 
 // ==========================================
-// 3. FUNCIÓN PARA PINTAR LOS PARTIDOS EN PANTALLA 
-// ==========================================
-function renderMatches() {
-  const container = document.getElementById("matches-list");
-  if (!container) return;
-
-  container.innerHTML = ""; // Limpiamos la lista anterior
-
-  // Filtramos los partidos según la selección del usuario
-  const filteredMatches = matchesData.filter(match => {
-    const matchesStatus = (activeStatus === "all" || match.status === activeStatus);
-    const matchesLeague = (activeLeague === "all" || match.league === activeLeague);
-    return matchesStatus && matchesLeague;
-  });
-
-  // Si no hay partidos que coincidan con los filtros
-  if (filteredMatches.length === 0) {
-    container.innerHTML = `
-      <div style="text-align: center; color: #888; padding: 40px; font-family: 'Share Tech Mono', monospace;">
-        No hay partidos registrados con este filtro.
-      </div>`;
-    return;
-  }
-
-  // Generamos el HTML para cada partido
-  filteredMatches.forEach(match => {
-    const isUpcoming = match.status === "upcoming";
-    const scoreText = isUpcoming ? "VS" : `${match.ourScore} - ${match.opponentScore}`;
-
-    const matchCard = document.createElement("div");
-    matchCard.className = `match-card ${match.status}`;
-    
-    // Contenedor principal de la tarjeta
-    matchCard.style.cssText = `
-      background: rgba(255, 255, 255, 0.02);
-      border-left: 4px solid ${match.status === 'win' ? '#2ecc71' : match.status === 'loss' ? '#e74c3c' : '#3498db'};
-      padding: 15px 20px;
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-      border-radius: 4px;
-      transition: all 0.3s ease;
-    `;
-
-    matchCard.innerHTML = `
-      <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 8px;">
-        <div style="display: flex; align-items: center; gap: 8px;">
-          ${match.leagueLogo ? `<img src="${match.leagueLogo}" alt="" style="height: 18px; width: auto; object-fit: contain;">` : ""}
-          <span style="font-family: 'Share Tech Mono', monospace; font-size: 0.8rem; color: #888; text-transform: uppercase;">
-            ${match.leagueName}
-          </span>
-        </div>
-        <span style="font-family: 'Share Tech Mono', monospace; font-size: 0.85rem; color: #666;">
-          ${match.date}
-        </span>
-      </div>
-
-      <div class="match-versus-row" style="display: flex; justify-content: space-between; align-items: center; gap: 15px; width: 100%;">
-        
-        <div style="display: flex; align-items: center; gap: 12px; flex: 1; justify-content: flex-end; min-width: 0;">
-          <span style="color: #fff; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: clamp(1rem, 2vw, 1.3rem); letter-spacing: 0.5px; text-transform: uppercase; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
-            DRAGONS
-          </span>
-          <img src="logo.png" alt="Dragons Logo" style="height: 35px; width: 35px; min-width: 35px; object-fit: contain;" onerror="this.style.display='none'">
-        </div>
-
-        <div style="display: flex; justify-content: center; min-width: 80px; flex-shrink: 0;">
-          <span style="background: rgba(255, 255, 255, 0.07); padding: 6px 16px; border-radius: 4px; font-family: 'Share Tech Mono', monospace; color: #fff; font-weight: bold; font-size: clamp(1rem, 2vw, 1.2rem); text-align: center; border: 1px solid rgba(255,255,255,0.1);">
-            ${scoreText}
-          </span>
-        </div>
-
-        <div style="display: flex; align-items: center; gap: 12px; flex: 1; justify-content: flex-start; min-width: 0;">
-          <img src="${match.opponentLogo}" alt="${match.opponent}" style="height: 35px; width: 35px; min-width: 35px; object-fit: contain;" onerror="this.style.display='none'">
-          <span style="color: #aaa; font-family: 'Barlow Condensed', sans-serif; font-weight: 600; font-size: clamp(1rem, 2vw, 1.3rem); letter-spacing: 0.5px; text-transform: uppercase; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
-            ${match.opponent}
-          </span>
-        </div>
-
-      </div>
-    `;
-
-    // Efecto Hover
-    matchCard.addEventListener("mouseenter", () => {
-      matchCard.style.background = "rgba(255, 255, 255, 0.05)";
-      matchCard.style.transform = "translateY(-2px)";
-    });
-    matchCard.addEventListener("mouseleave", () => {
-      matchCard.style.background = "rgba(255, 255, 255, 0.02)";
-      matchCard.style.transform = "translateY(0)";
-    });
-
-    container.appendChild(matchCard);
-  });
-}
-
-// ==========================================
-// 4. LÓGICA DE FILTRADO (EVENT LISTENERS)
-// ==========================================
-document.addEventListener("DOMContentLoaded", () => {
-  
-  // Filtros de Estado (Victorias, Derrotas, Próximos)
-  const statusButtons = document.querySelectorAll("#status-filters .res-filter");
-  statusButtons.forEach(button => {
-    button.addEventListener("click", () => {
-      statusButtons.forEach(btn => btn.classList.remove("active"));
-      button.classList.add("active");
-      activeStatus = button.getAttribute("data-status");
-      renderMatches();
-    });
-  });
-
-  // Filtros de Ligas
-  const leagueButtons = document.querySelectorAll("#league-filters .res-filter");
-  leagueButtons.forEach(button => {
-    button.addEventListener("click", () => {
-      leagueButtons.forEach(btn => btn.classList.remove("active"));
-      button.classList.add("active");
-      activeLeague = button.getAttribute("data-league");
-      renderMatches();
-    });
-  });
-
-  // Render inicial al cargar la página
-  renderMatches();
-});
-
-// ==========================================
-// 5. MENÚ RESPONSIVE (Función toggleMenu de tu HTML)
+//  MENÚ RESPONSIVE
 // ==========================================
 function toggleMenu() {
   const mobileNav = document.getElementById("nav-mobile");
@@ -285,4 +73,174 @@ function toggleMenu() {
     mobileNav.classList.toggle("open");
     hamburger.classList.toggle("active");
   }
+}
+
+// ==========================================
+//  TODO EN UN SOLO DOMContentLoaded
+// ==========================================
+document.addEventListener("DOMContentLoaded", () => {
+
+  // ── 1. ESTADÍSTICAS AUTOMÁTICAS ─────────
+  const jugados   = matchesData.filter(m => m.status === "win" || m.status === "loss");
+  const victorias = jugados.filter(m => m.status === "win").length;
+  const derrotas  = jugados.filter(m => m.status === "loss").length;
+  const winRate   = jugados.length > 0
+    ? Math.round((victorias / jugados.length) * 100) : 0;
+
+  function contar(elId, hasta, sufijo = "") {
+    const el = document.getElementById(elId);
+    if (!el) return;
+    const inicio = performance.now();
+    const dur = 1800;
+    (function paso(ahora) {
+      const t = Math.min((ahora - inicio) / dur, 1);
+      const ease = 1 - Math.pow(1 - t, 3);
+      el.textContent = Math.floor(ease * hasta) + sufijo;
+      if (t < 1) requestAnimationFrame(paso);
+    })(inicio);
+  }
+
+  contar("rec-wins",    victorias);
+  contar("rec-losses",  derrotas);
+  contar("rec-wr",      winRate, "%");
+  contar("rec-players", 5);
+
+  // ── 2. TICKER AUTOMÁTICO ─────────────────
+  const ticker = document.getElementById("ticker-inner");
+  if (ticker) {
+    const items = matchesData.map(m => {
+      if (m.status === "upcoming")
+        return `PRÓXIMO: DRAGONS vs ${m.opponent.toUpperCase()} (${m.date})`;
+      if (m.status === "win")
+        return `✓ DRAGONS ${m.ourScore} - ${m.opponentScore} ${m.opponent.toUpperCase()}`;
+      return `✗ DRAGONS ${m.ourScore} - ${m.opponentScore} ${m.opponent.toUpperCase()}`;
+    });
+    const text = items.join("   ///   ") + "   ///   ";
+    ticker.textContent = text + text; // duplicado para loop sin salto
+  }
+
+  // ── 3. SPONSORS ──────────────────────────
+  const sponsorsGrid = document.getElementById("sponsors-grid");
+  if (sponsorsGrid) {
+    sponsorsGrid.innerHTML = sponsorsData.map(s => `
+      <div class="sponsor-card">
+        <div class="sponsor-logo">
+          ${s.logo ? `<img src="${s.logo}" alt="${s.name}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">` : ""}
+          <span class="sponsor-initials" style="${s.logo ? 'display:none' : ''}">
+            ${s.name.charAt(0)}
+          </span>
+        </div>
+        <div class="sponsor-info">
+          <div class="sponsor-tag">${s.tag}</div>
+          <h3 class="sponsor-name">${s.name}</h3>
+          <p class="sponsor-desc">${s.description}</p>
+          ${s.link ? `<a href="${s.link}" target="_blank" class="sponsor-link">Visitar →</a>` : ""}
+        </div>
+      </div>
+    `).join("");
+  }
+
+  // ── 4. PARTIDOS ───────────────────────────
+  renderMatches();
+
+  // Filtros de estado
+  document.querySelectorAll("#status-filters .res-filter").forEach(btn => {
+    btn.addEventListener("click", () => {
+      document.querySelectorAll("#status-filters .res-filter")
+        .forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      activeStatus = btn.getAttribute("data-status");
+      renderMatches();
+    });
+  });
+
+  // Filtros de liga
+  document.querySelectorAll("#league-filters .res-filter").forEach(btn => {
+    btn.addEventListener("click", () => {
+      document.querySelectorAll("#league-filters .res-filter")
+        .forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      activeLeague = btn.getAttribute("data-league");
+      renderMatches();
+    });
+  });
+
+});
+
+// ==========================================
+//  RENDER PARTIDOS
+// ==========================================
+function renderMatches() {
+  const container = document.getElementById("matches-list");
+  if (!container) return;
+
+  container.innerHTML = "";
+
+  const filtered = matchesData.filter(m => {
+    const okStatus = activeStatus === "all" || m.status === activeStatus;
+    const okLeague = activeLeague === "all" || m.league === activeLeague;
+    return okStatus && okLeague;
+  });
+
+  if (filtered.length === 0) {
+    container.innerHTML = `<div style="text-align:center;color:#888;padding:40px;
+      font-family:'Share Tech Mono',monospace;">
+      No hay partidos con este filtro.</div>`;
+    return;
+  }
+
+  filtered.forEach(match => {
+    const isUpcoming = match.status === "upcoming";
+    const scoreText  = isUpcoming ? "VS" : `${match.ourScore} - ${match.opponentScore}`;
+    const borderColor = match.status === "win" ? "#2ecc71"
+                      : match.status === "loss" ? "#e74c3c" : "#3498db";
+
+    const card = document.createElement("div");
+    card.className = `match-card ${match.status}`;
+    card.style.cssText = `background:rgba(255,255,255,0.02);border-left:4px solid ${borderColor};
+      padding:15px 20px;display:flex;flex-direction:column;gap:15px;
+      border-radius:4px;transition:all 0.3s ease;`;
+
+    card.innerHTML = `
+      <div style="display:flex;justify-content:space-between;align-items:center;
+        border-bottom:1px solid rgba(255,255,255,0.05);padding-bottom:8px;">
+        <div style="display:flex;align-items:center;gap:8px;">
+          ${match.leagueLogo ? `<img src="${match.leagueLogo}" alt="" style="height:18px;">` : ""}
+          <span style="font-family:'Share Tech Mono',monospace;font-size:0.8rem;
+            color:#888;text-transform:uppercase;">${match.leagueName}</span>
+        </div>
+        <span style="font-family:'Share Tech Mono',monospace;font-size:0.85rem;color:#666;">
+          ${match.date}</span>
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:15px;">
+        <div style="display:flex;align-items:center;gap:12px;flex:1;justify-content:flex-end;">
+          <span style="color:#fff;font-family:'Barlow Condensed',sans-serif;font-weight:700;
+            font-size:1.2rem;text-transform:uppercase;">DRAGONS</span>
+          <img src="logo.png" alt="" style="height:35px;width:35px;object-fit:contain;"
+            onerror="this.style.display='none'">
+        </div>
+        <div style="min-width:80px;text-align:center;">
+          <span style="background:rgba(255,255,255,0.07);padding:6px 16px;border-radius:4px;
+            font-family:'Share Tech Mono',monospace;color:#fff;font-weight:bold;font-size:1.1rem;
+            border:1px solid rgba(255,255,255,0.1);">${scoreText}</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;flex:1;justify-content:flex-start;">
+          <img src="${match.opponentLogo}" alt="${match.opponent}"
+            style="height:35px;width:35px;object-fit:contain;" onerror="this.style.display='none'">
+          <span style="color:#aaa;font-family:'Barlow Condensed',sans-serif;font-weight:600;
+            font-size:1.2rem;text-transform:uppercase;">${match.opponent}</span>
+        </div>
+      </div>`;
+
+    card.addEventListener("mouseenter", () => {
+      card.style.background = "rgba(255,255,255,0.05)";
+      card.style.transform  = "translateY(-2px)";
+    });
+    card.addEventListener("mouseleave", () => {
+      card.style.background = "rgba(255,255,255,0.02)";
+      card.style.transform  = "translateY(0)";
+    });
+
+    container.appendChild(card);
+  });
 }
