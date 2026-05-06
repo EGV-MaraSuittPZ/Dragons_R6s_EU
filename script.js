@@ -88,6 +88,59 @@ document.addEventListener("DOMContentLoaded", () => {
   contar("rec-wr",     winRate, "%");
 
 });
+
+
+// ==========================================
+//  DATOS DE SPONSORS — edita aquí
+// ==========================================
+const sponsorsData = [
+  {
+    name: "Nombre del Sponsor",
+    logo: "Logos/sponsor1.png",  // ruta al logo, o "" si no tienes
+    description: "Breve descripción del sponsor o tipo de colaboración.",
+    link: "https://web-del-sponsor.com",
+    tag: "Patrocinador Principal"
+  },
+  {
+    name: "Otro Sponsor",
+    logo: "",
+    description: "Segunda empresa o marca colaboradora.",
+    link: "",
+    tag: "Colaborador"
+  },
+];
+
+// ==========================================
+//  RENDER SPONSORS
+// ==========================================
+function renderSponsors() {
+  const grid = document.getElementById("sponsors-grid");
+  if (!grid) return;
+
+  grid.innerHTML = sponsorsData.map(s => `
+    <div class="sponsor-card">
+      <div class="sponsor-logo">
+        ${s.logo
+          ? `<img src="${s.logo}" alt="${s.name}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">`
+          : ""}
+        <span class="sponsor-initials" style="${s.logo ? 'display:none' : ''}">
+          ${s.name.charAt(0)}
+        </span>
+      </div>
+      <div class="sponsor-info">
+        <div class="sponsor-tag">${s.tag}</div>
+        <h3 class="sponsor-name">${s.name}</h3>
+        <p class="sponsor-desc">${s.description}</p>
+        ${s.link ? `<a href="${s.link}" target="_blank" class="sponsor-link">Visitar →</a>` : ""}
+      </div>
+    </div>
+  `).join("");
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  renderSponsors();
+  // ... tus otras funciones
+});
 // ==========================================
 // 2. ESTADO DE LOS FILTROS ACTIVOS
 // ==========================================
