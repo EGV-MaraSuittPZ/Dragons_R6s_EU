@@ -49,9 +49,9 @@ const matchesData = [
 // ==========================================
 const sponsorsData = [
   {
-    name: "Nombre del Sponsor",
+    name: "-",
     logo: "",
-    description: "Breve descripción del sponsor o colaboración.",
+    description: "-",
     link: "",
     tag: "Patrocinador Principal"
   },
