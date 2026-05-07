@@ -11,6 +11,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,300;0,600;0,700;0,900;1,700&family=Barlow:wght@300;400;500;600&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 </head>
 <body>
+  
 
 <!-- NAV -->
 <nav id="navbar">
@@ -25,6 +26,7 @@
 <div class="nav-links">
 <a href="#roster">Roster</a>
 <a href="#results">Resultados</a>
+<a href="#mvp">MVP</a>
 <a href="#achievements">Palmarés</a>
 <a href="#about">Historia</a>
 <a href="#sponsors">Sponsors</a>
@@ -144,6 +146,15 @@ Discord
     <div id="matches-list" style="margin-top: 30px; display: flex; flex-direction: column; gap: 12px;"></div>
   </div>
 </section>
+
+  <!-- MVP DEL MES -->
+<section id="mvp">
+<div class="container">
+  <div class="section-eyebrow">// RECONOCIMIENTO MENSUAL</div>
+  <h2 class="section-heading">MVP DEL MES</h2>
+  <div class="mvp-grid" id="mvp-grid"></div>
+</div>
+</section>
 <!-- ACHIEVEMENTS -->
 <section id="achievements">
 <div class="container">
@@ -238,7 +249,7 @@ Discord
 </div>
 </div>
 </footer>
-
+<script src="mvp-data.js"></script>
 <script src="script.js"></script>
 </body>
 </html>
