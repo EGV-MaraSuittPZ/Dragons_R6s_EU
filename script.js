@@ -264,3 +264,18 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
 });
+
+// Añade esta función:
+function renderMvp() {
+  const grid = document.getElementById("mvp-grid");
+  if (!grid || !mvpData || mvpData.length === 0) return;
+  grid.innerHTML = mvpData.map(m => `
+    <div class="mvp-card${m.current ? " current" : ""}">
+      ${m.current ? '<span class="mvp-badge-current">MVP ACTUAL</span>' : ''}
+      <img class="mvp-img" src="${m.image}" alt="${m.player}">
+    </div>
+  `).join("");
+}
+
+// Dentro del DOMContentLoaded, añade:
+renderMvp();
