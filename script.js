@@ -46,8 +46,8 @@ const rosterData = [
   { name: "qSxntxxx",     role: "jugador",  position: "Rifler",  photo: ""  },
 
   // DIRECCIÓN
-  { name: "WZA-copeete",  role: "staff", position: "CEO", photo: "", },
-  { name: "MaraSuitt_PZ", role: "staff", position: "CEO", photo: ""},
+  { name: "WZA-copeete",  role: "staff", position: "CEO", photo: "" },
+  { name: "MaraSuitt_PZ", role: "staff", position: "CEO", photo: "" },
 ];
 // ── Helpers ──────────────────────────────────────────────────────────────────
 function getInitials(name) {
