@@ -49,7 +49,7 @@ const rosterData = [
 
   // ── CEOs / DIRECCIÓN ─────────────────────────────────────────────────────
   { name: "WZA-copeete",  role: "staff",    position: "CEO",          photo: "", twitter: "" },
-  { name: "MaraSuitt_PZ"",  role: "staff",    position: "CEO",          photo: "", twitter: "" },
+  { name: "MaraSuitt_PZ",  role: "staff",    position: "CEO",          photo: "", twitter: "" },
   { name: "",  role: "staff",    position: "Team Manager", photo: "", twitter: "" },
   // ➕ Añadir CEO: pon el nick en name y "CEO" en position
 
