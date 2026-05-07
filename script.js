@@ -41,7 +41,7 @@ const rosterData = [
   { name: "WZA-copeete",       role: ["jugador", "staff"],   position: "IGL", photo: "" },
   { name: "MaraSuitt_PZ",       role: ["jugador", "staff"],   position: "Support",       photo: "" },
   { name: "GwrciaRetun",       role: ["jugador", "staff"],   position: "FLEX",           photo: "" },
-  { name: "Xx_Druiazul",     role: ["jugador", "staff"],   position: "IGL",        photo: "" },
+  { name: "Xx_Druiazul",     role: ["jugador", "staff"],   position: "IGL",        photo: "Jugadores/Gabybebee" },
   { name: "GABYBEBEE",    role: "jugador",   position: "Support",        photo: "" },
   { name: "qSxntxxx",     role: "jugador",     position: "",    photo: "" },
   { name: "",   role: "staff",     position: "Team Manager",  photo: "" },
