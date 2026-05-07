@@ -37,7 +37,6 @@ const matchesData = [
 // ==========================================
 //  ROSTER — edita aquí
 // ==========================================
-const rosterData = [
  const rosterData = [
   // JUGADORES
   { name: "GwrciaRetun",  role: "jugador",  position: "FLEX",    photo: "" },
