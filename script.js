@@ -40,7 +40,7 @@ const matchesData = [
 const rosterData = [
   // ── JUGADORES ───────────────────────────────────────────────────────────
   { name: "",  role: "jugador",  position: "IGL",     photo: "",                        twitter: "" },
-  { name: ", role: "jugador",  position: "Support", photo: "",                        twitter: "" },
+  { name: "", role: "jugador",  position: "Support", photo: "",                        twitter: "" },
   { name: "GwrciaRetun",  role: "jugador",  position: "FLEX",    photo: "",                        twitter: "" },
   { name: "Xx_Druiazul",  role: "jugador",  position: "IGL",     photo: "",                        twitter: "" },
   { name: "GABYBEBEE",    role: "jugador",  position: "Support", photo: "Jugadores/Gabybebee.png",  twitter: "" },
