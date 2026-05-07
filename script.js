@@ -38,26 +38,17 @@ const matchesData = [
 //  ROSTER — edita aquí
 // ==========================================
 const rosterData = [
-  // ── JUGADORES ───────────────────────────────────────────────────────────
-  { name: "",  role: "jugador",  position: "IGL",     photo: "",                        twitter: "" },
-  { name: "", role: "jugador",  position: "Support", photo: "",                        twitter: "" },
-  { name: "GwrciaRetun",  role: "jugador",  position: "FLEX",    photo: "",                        twitter: "" },
-  { name: "Xx_Druiazul",  role: "jugador",  position: "IGL",     photo: "",                        twitter: "" },
-  { name: "GABYBEBEE",    role: "jugador",  position: "Support", photo: "Jugadores/Gabybebee.png",  twitter: "" },
-  { name: "qSxntxxx",     role: "jugador",  position: "Rifler",  photo: "",                        twitter: "" },
-  // ➕ Añadir jugador: copia una línea, cambia name/position/photo/twitter
+ const rosterData = [
+  // JUGADORES
+  { name: "GwrciaRetun",  role: "jugador",  position: "FLEX",    photo: "" },
+  { name: "Xx_Druiazul",  role: "jugador",  position: "IGL",     photo: "" },
+  { name: "GABYBEBEE",    role: "jugador",  position: "Support", photo: "Jugadores/Gabybebee.png",  },
+  { name: "qSxntxxx",     role: "jugador",  position: "Rifler",  photo: ""  },
 
-  // ── CEOs / DIRECCIÓN ─────────────────────────────────────────────────────
-  { name: "WZA-copeete",  role: "staff",    position: "CEO",          photo: "", twitter: "" },
-  { name: "MaraSuitt_PZ",  role: "staff",    position: "CEO",          photo: "", twitter: "" },
-  { name: "",  role: "staff",    position: "Team Manager", photo: "", twitter: "" },
-  // ➕ Añadir CEO: pon el nick en name y "CEO" en position
-
-  // ── STREAMERS ────────────────────────────────────────────────────────────
-  { name: "",  role: "streamer", position: "Streamer", photo: "", twitter: "" },
-  // ➕ Añadir streamer: pon el nick en name y su twitter
+  // DIRECCIÓN
+  { name: "WZA-copeete",  role: "staff", position: "CEO", photo: "", },
+  { name: "MaraSuitt_PZ", role: "staff", position: "CEO", photo: ""},
 ];
-
 // ── Helpers ──────────────────────────────────────────────────────────────────
 function getInitials(name) {
   if (!name) return "?";
