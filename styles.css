@@ -1372,3 +1372,170 @@ footer {
 .mvp-card.current { box-shadow: 0 0 0 2px #39ff14, 0 0 30px rgba(57,255,20,0.2); }
 .mvp-img { width: 100%; height: auto; display: block; border-radius: 6px; }
 .mvp-badge-current { position: absolute; top: 0.75rem; right: 0.75rem; font-family: monospace; font-size: 0.55rem; letter-spacing: 0.18em; color: #000; background: #39ff14; padding: 4px 10px; border-radius: 2px; font-weight: 700; }
+
+/* ===================== ROSTER ===================== */
+.roster-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+@media (max-width: 1000px) { .roster-grid { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 600px)  { .roster-grid { grid-template-columns: repeat(2, 1fr); } }
+
+/* Subsecciones */
+.mw-subsection        { margin-top: 60px; text-align: center; }
+.mw-subsection-title  {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.68rem; letter-spacing: 5px;
+  text-transform: uppercase; color: #666; margin-bottom: 24px;
+}
+.mw-sub-grid {
+  display: flex; justify-content: center;
+  gap: 16px; flex-wrap: wrap; max-width: 700px; margin: 0 auto;
+}
+.mw-sub-grid .mw-player-card { width: 180px; flex-shrink: 0; }
+
+/* ── Tarjeta jugador ── */
+.mw-player-card {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(57,255,20,0.07);
+  position: relative; overflow: hidden; cursor: pointer;
+  transition: transform 0.5s cubic-bezier(0.16,1,0.3,1),
+              border-color 0.5s, box-shadow 0.5s;
+  clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 16px,
+                     100% 100%, 16px 100%, 0 calc(100% - 16px));
+}
+.mw-player-card:hover {
+  border-color: rgba(57,255,20,0.35);
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 25px 50px rgba(57,255,20,0.08),
+              0 0 0 1px rgba(57,255,20,0.08);
+}
+
+/* Avatar */
+.mw-avatar {
+  width: 100%; aspect-ratio: 3/4;
+  position: relative; overflow: hidden;
+  background: #111;
+}
+.mw-avatar img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: top;
+}
+.mw-avatar-bg {
+  width: 100%; height: 100%;
+  display: flex; align-items: center; justify-content: center;
+  background: linear-gradient(180deg, rgba(57,255,20,0.02) 0%, rgba(57,255,20,0.08) 100%);
+  position: relative;
+  transition: transform 0.6s cubic-bezier(0.16,1,0.3,1);
+}
+.mw-player-card:hover .mw-avatar-bg { transform: scale(1.06); }
+
+.mw-initial {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 4.5rem; font-weight: 900;
+  color: rgba(57,255,20,0.15); letter-spacing: 4px;
+  position: relative; z-index: 2;
+  transition: color 0.5s, text-shadow 0.5s;
+}
+.mw-player-card:hover .mw-initial {
+  color: rgba(57,255,20,0.4);
+  text-shadow: 0 0 40px rgba(57,255,20,0.3);
+}
+.mw-glow {
+  position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
+  width: 80%; height: 60%;
+  background: radial-gradient(ellipse at bottom, rgba(57,255,20,0.12) 0%, transparent 70%);
+  opacity: 0; transition: opacity 0.5s; z-index: 1;
+}
+.mw-player-card:hover .mw-glow { opacity: 1; }
+
+/* Número y badge */
+.mw-num {
+  position: absolute; top: 10px; right: 12px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1rem; font-weight: 900;
+  color: rgba(57,255,20,0.15); z-index: 2;
+}
+.mw-badge {
+  position: absolute; top: 10px; left: 10px;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.5rem; letter-spacing: 2px;
+  text-transform: uppercase; padding: 3px 10px;
+  background: #39ff14; color: #000; font-weight: 700;
+  z-index: 3;
+  clip-path: polygon(0 0, calc(100% - 4px) 0, 100% 4px,
+                     100% 100%, 4px 100%, 0 calc(100% - 4px));
+}
+
+/* Nombre */
+.mw-info {
+  padding: 14px 14px 16px; text-align: center;
+  position: relative; z-index: 2;
+}
+.mw-info::before {
+  content: ''; position: absolute; top: 0; left: 15%; width: 70%; height: 2px;
+  background: linear-gradient(90deg, transparent, #39ff14, transparent);
+}
+.mw-name {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.95rem; font-weight: 700;
+  letter-spacing: 2.5px; text-transform: uppercase; color: #fff;
+}
+.mw-pos {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.6rem; color: #666;
+  letter-spacing: 2px; margin-top: 4px;
+}
+
+/* Social popup al hover */
+.mw-social-popup {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  background: rgba(0,0,0,0.92); backdrop-filter: blur(12px);
+  padding: 12px; display: flex; justify-content: center; gap: 10px;
+  z-index: 10; opacity: 0; transform: translateY(10px);
+  transition: all 0.35s cubic-bezier(0.16,1,0.3,1);
+  pointer-events: none;
+  border-top: 2px solid #39ff14;
+}
+.mw-player-card:hover .mw-social-popup {
+  opacity: 1; transform: translateY(0); pointer-events: all;
+}
+.mw-social-popup a {
+  width: 34px; height: 34px;
+  border: 1px solid rgba(57,255,20,0.25);
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.3s; text-decoration: none;
+  clip-path: polygon(0 0, calc(100% - 5px) 0, 100% 5px,
+                     100% 100%, 5px 100%, 0 calc(100% - 5px));
+}
+.mw-social-popup a:hover {
+  background: #39ff14; border-color: #39ff14; transform: scale(1.15);
+}
+.mw-social-popup a svg { width: 15px; height: 15px; fill: #fff; }
+.mw-social-popup a:hover svg { fill: #000; }
+
+/* Staff (dorado) */
+.staff-card { border-color: rgba(212,160,23,0.1); }
+.staff-card:hover { border-color: rgba(212,160,23,0.45); box-shadow: 0 25px 50px rgba(212,160,23,0.08); }
+.staff-card .mw-avatar-bg { background: linear-gradient(180deg, rgba(212,160,23,0.03) 0%, rgba(212,160,23,0.1) 100%); }
+.staff-card .mw-initial { color: rgba(212,160,23,0.2); }
+.staff-card:hover .mw-initial { color: rgba(212,160,23,0.45); }
+.staff-card .mw-badge { background: linear-gradient(135deg,#d4a017,#f0c040); color: #1a1a1a; }
+.staff-card .mw-info::before { background: linear-gradient(90deg, transparent, rgba(212,160,23,0.6), transparent); }
+.staff-card .mw-social-popup { border-top-color: rgba(212,160,23,0.8); }
+.staff-card .mw-social-popup a:hover { background: rgba(212,160,23,0.9); border-color: rgba(212,160,23,0.9); }
+
+/* Streamers (morado) */
+.streamer-card { border-color: rgba(145,70,255,0.1); }
+.streamer-card:hover { border-color: rgba(145,70,255,0.45); box-shadow: 0 25px 50px rgba(145,70,255,0.08); }
+.streamer-card .mw-avatar-bg { background: linear-gradient(180deg, rgba(145,70,255,0.03) 0%, rgba(145,70,255,0.1) 100%); }
+.streamer-card .mw-initial { color: rgba(145,70,255,0.2); }
+.streamer-card:hover .mw-initial { color: rgba(145,70,255,0.45); }
+.streamer-card .mw-badge { background: rgba(145,70,255,0.85); color: #fff; }
+.streamer-card .mw-info::before { background: linear-gradient(90deg, transparent, rgba(145,70,255,0.6), transparent); }
+.streamer-card .mw-social-popup { border-top-color: rgba(145,70,255,0.8); }
+.streamer-card .mw-social-popup a:hover { background: rgba(145,70,255,0.9); border-color: rgba(145,70,255,0.9); }
