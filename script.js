@@ -42,7 +42,7 @@ const rosterData = [
   // JUGADORES
   { name: "GwrciaRetun",  role: "jugador",  position: "FLEX",    photo: "" },
   { name: "Xx_Druiazul",  role: "jugador",  position: "IGL",     photo: "" },
-  { name: "GABYBEBEE",    role: "jugador",  position: "Support", photo: "Jugadores/Gabybebee.png",  },
+  { name: "GABYBEBEE",    role: "jugador",  position: "Support", photo: "Jugadores/Gabybebee.png" },
   { name: "qSxntxxx",     role: "jugador",  position: "Rifler",  photo: ""  },
 
   // DIRECCIÓN
