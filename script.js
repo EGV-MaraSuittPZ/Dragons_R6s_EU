@@ -38,16 +38,102 @@ const matchesData = [
 //  ROSTER — edita aquí
 // ==========================================
 const rosterData = [
-  { name: "WZA-copeete",       role: ["jugador", "staff"],   position: "IGL", photo: "" },
-  { name: "MaraSuitt_PZ",       role: ["jugador", "staff"],   position: "Support",       photo: "" },
-  { name: "GwrciaRetun",       role: ["jugador", "staff"],   position: "FLEX",           photo: "" },
-  { name: "Xx_Druiazul",     role: ["jugador", "staff"],   position: "IGL",        photo: "" },
-  { name: "GABYBEBEE",    role: "jugador",   position: "Support",        photo: "Jugadores/Gabybebee.png" },
-  { name: "qSxntxxx",     role: "jugador",     position: "",    photo: "" },
-  { name: "",   role: "staff",     position: "Team Manager",  photo: "" },
-  { name: "", role: "streamer",  position: "Streamer",      photo: "" },
+  // ── JUGADORES ───────────────────────────────────────────────────────────
+  { name: "",  role: "jugador",  position: "IGL",     photo: "",                        twitter: "" },
+  { name: ", role: "jugador",  position: "Support", photo: "",                        twitter: "" },
+  { name: "GwrciaRetun",  role: "jugador",  position: "FLEX",    photo: "",                        twitter: "" },
+  { name: "Xx_Druiazul",  role: "jugador",  position: "IGL",     photo: "",                        twitter: "" },
+  { name: "GABYBEBEE",    role: "jugador",  position: "Support", photo: "Jugadores/Gabybebee.png",  twitter: "" },
+  { name: "qSxntxxx",     role: "jugador",  position: "Rifler",  photo: "",                        twitter: "" },
+  // ➕ Añadir jugador: copia una línea, cambia name/position/photo/twitter
+
+  // ── CEOs / DIRECCIÓN ─────────────────────────────────────────────────────
+  { name: "WZA-copeete",  role: "staff",    position: "CEO",          photo: "", twitter: "" },
+  { name: "MaraSuitt_PZ"",  role: "staff",    position: "CEO",          photo: "", twitter: "" },
+  { name: "",  role: "staff",    position: "Team Manager", photo: "", twitter: "" },
+  // ➕ Añadir CEO: pon el nick en name y "CEO" en position
+
+  // ── STREAMERS ────────────────────────────────────────────────────────────
+  { name: "",  role: "streamer", position: "Streamer", photo: "", twitter: "" },
+  // ➕ Añadir streamer: pon el nick en name y su twitter
 ];
 
+// ── Helpers ──────────────────────────────────────────────────────────────────
+function getInitials(name) {
+  if (!name) return "?";
+  const parts = name.split(/[-_\s]/);
+  return parts.length >= 2
+    ? (parts[0][0] + (parts[1][0] || "")).toUpperCase()
+    : name.slice(0, 2).toUpperCase();
+}
+
+function buildCard(p, index, extraClass) {
+  extraClass = extraClass || "";
+  const initials  = getInitials(p.name);
+  const hasSocial = p.twitter;
+  const photoHTML = p.photo
+    ? `<img src="${p.photo}" alt="${p.name}"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">`
+    : "";
+
+  return `
+    <div class="mw-player-card ${extraClass}">
+      ${p.position ? `<span class="mw-badge">${p.position}</span>` : ""}
+      <span class="mw-num">0${index + 1}</span>
+      <div class="mw-avatar">
+        ${photoHTML}
+        <div class="mw-avatar-bg" ${p.photo ? 'style="display:none"' : ""}>
+          <div class="mw-glow"></div>
+          <span class="mw-initial">${initials}</span>
+        </div>
+      </div>
+      <div class="mw-info">
+        <div class="mw-name">${p.name || "TBD"}</div>
+        ${p.position ? `<div class="mw-pos">${p.position}</div>` : ""}
+      </div>
+      ${hasSocial ? `
+        <div class="mw-social-popup">
+          <a href="https://x.com/${p.twitter}" target="_blank" title="Twitter/X">
+            <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          </a>
+        </div>` : ""}
+    </div>`;
+}
+
+function renderRoster() {
+  const grid = document.getElementById("roster-grid");
+  const subs  = document.getElementById("roster-subsections");
+  if (!grid) return;
+
+  const jugadores = rosterData.filter(p => p.role === "jugador" && p.name);
+  const streamers = rosterData.filter(p => p.role === "streamer" && p.name);
+  const direccion = rosterData.filter(p => p.role === "staff"    && p.name);
+
+  grid.innerHTML = jugadores.map((p, i) => buildCard(p, i, "")).join("");
+
+  if (!subs) return;
+  subs.innerHTML = "";
+
+  if (streamers.length > 0) {
+    subs.innerHTML += `
+      <div class="mw-subsection">
+        <div class="mw-subsection-title">// Streamers Asociados</div>
+        <div class="mw-sub-grid">
+          ${streamers.map((p, i) => buildCard(p, i, "streamer-card")).join("")}
+        </div>
+      </div>`;
+  }
+
+  if (direccion.length > 0) {
+    subs.innerHTML += `
+      <div class="mw-subsection">
+        <div class="mw-subsection-title">// Dirección</div>
+        <div class="mw-sub-grid">
+          ${direccion.map((p, i) => buildCard(p, i, "staff-card")).join("")}
+        </div>
+      </div>`;
+  }
+}
 // ==========================================
 //  SPONSORS — edita aquí
 // ==========================================
