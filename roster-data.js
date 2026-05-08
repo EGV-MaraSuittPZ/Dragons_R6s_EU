@@ -5,7 +5,6 @@
 //    role     → "jugador" | "streamer" | "staff"
 //    position → cargo visible (ej: "Capitan", "CEO", "Streamer")
 //    photo    → ruta a la foto (carpeta Jugadores/) o "" para usar iniciales
-//    twitter  → nombre de usuario de X/Twitter (sin @), opcional
 // ==========================================
 
 const rosterData = [
