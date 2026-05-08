@@ -60,31 +60,32 @@ function getInitials(name) {
     : name.slice(0, 2).toUpperCase();
 }
 
-function buildCard(p, index) {
+function buildCard(p, index, extraClass) {
+  extraClass = extraClass || "";
   const initials = getInitials(p.name);
   const num = String(index + 1).padStart(2, "0");
   return `
-    <div class="player-card">
-      <div class="player-card-top">
-        ${p.position ? `<div class="player-role-badge">${p.position}</div>` : ""}
-        <span class="player-num">${num}</span>
+    <div class="mw-player-card ${extraClass}">
+      ${p.position ? `<span class="mw-badge">${p.position}</span>` : ""}
+      <span class="mw-num">${num}</span>
+      <div class="mw-avatar">
         ${p.photo
-          ? `<img class="player-avatar-img" src="${p.photo}" alt="${p.name}"
+          ? `<img src="${p.photo}" alt="${p.name}"
                onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-             <div class="player-avatar-fallback" style="display:none">${initials}</div>`
-          : `<div class="player-avatar-fallback">${initials}</div>`
+             <div class="mw-avatar-bg" style="display:none"><div class="mw-glow"></div><span class="mw-initial">${initials}</span></div>`
+          : `<div class="mw-avatar-bg"><div class="mw-glow"></div><span class="mw-initial">${initials}</span></div>`
         }
       </div>
-      <div class="player-card-body">
-        <div class="player-ign">${p.name || "TBD"}</div>
-        ${p.role ? `<div class="player-realname">${p.role === "staff" ? p.position : p.role.toUpperCase()}</div>` : ""}
-        ${p.twitter ? `
-          <div class="player-socials">
-            <a href="https://x.com/${p.twitter}" target="_blank" class="psocial" title="Twitter/X">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-            </a>
-          </div>` : ""}
+      <div class="mw-info">
+        <div class="mw-name">${p.name || "TBD"}</div>
+        ${p.position ? `<div class="mw-pos">${p.position}</div>` : ""}
       </div>
+      ${p.twitter ? `
+        <div class="mw-social-popup">
+          <a href="https://x.com/${p.twitter}" target="_blank" title="Twitter/X">
+            <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          </a>
+        </div>` : ""}
     </div>`;
 }
 
@@ -97,27 +98,27 @@ function renderRoster() {
   const streamers = rosterData.filter(p => p.role === "streamer" && p.name);
   const direccion = rosterData.filter(p => p.role === "staff"    && p.name);
 
-  grid.innerHTML = jugadores.map((p, i) => buildCard(p, i)).join("");
+  grid.innerHTML = jugadores.map((p, i) => buildCard(p, i, "")).join("");
 
   if (!subs) return;
   subs.innerHTML = "";
 
   if (streamers.length > 0) {
     subs.innerHTML += `
-      <div style="margin-top:3rem;">
-        <div class="section-eyebrow" style="margin-bottom:1.5rem;">// Streamers Asociados</div>
-        <div class="roster-grid">
-          ${streamers.map((p, i) => buildCard(p, i)).join("")}
+      <div class="mw-subsection">
+        <div class="mw-subsection-title">// Streamers Asociados</div>
+        <div class="mw-sub-grid">
+          ${streamers.map((p, i) => buildCard(p, i, "streamer-card")).join("")}
         </div>
       </div>`;
   }
 
   if (direccion.length > 0) {
     subs.innerHTML += `
-      <div style="margin-top:3rem;">
-        <div class="section-eyebrow" style="margin-bottom:1.5rem;">// Dirección</div>
-        <div class="roster-grid">
-          ${direccion.map((p, i) => buildCard(p, i)).join("")}
+      <div class="mw-subsection">
+        <div class="mw-subsection-title">// Dirección</div>
+        <div class="mw-sub-grid">
+          ${direccion.map((p, i) => buildCard(p, i, "staff-card")).join("")}
         </div>
       </div>`;
   }
