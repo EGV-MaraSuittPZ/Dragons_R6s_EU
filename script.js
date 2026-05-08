@@ -57,36 +57,31 @@ function getInitials(name) {
     : name.slice(0, 2).toUpperCase();
 }
 
-function buildCard(p, index, extraClass) {
-  extraClass = extraClass || "";
-  const initials  = getInitials(p.name);
-  const hasSocial = p.twitter;
-  const photoHTML = p.photo
-    ? `<img src="${p.photo}" alt="${p.name}"
-          onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">`
-    : "";
-
+function buildCard(p, index) {
+  const initials = getInitials(p.name);
+  const num = String(index + 1).padStart(2, "0");
   return `
-    <div class="mw-player-card ${extraClass}">
-      ${p.position ? `<span class="mw-badge">${p.position}</span>` : ""}
-      <span class="mw-num">0${index + 1}</span>
-      <div class="mw-avatar">
-        ${photoHTML}
-        <div class="mw-avatar-bg" ${p.photo ? 'style="display:none"' : ""}>
-          <div class="mw-glow"></div>
-          <span class="mw-initial">${initials}</span>
-        </div>
+    <div class="player-card">
+      <div class="player-card-top">
+        ${p.position ? `<div class="player-role-badge">${p.position}</div>` : ""}
+        <span class="player-num">${num}</span>
+        ${p.photo
+          ? `<img class="player-avatar-img" src="${p.photo}" alt="${p.name}"
+               onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+             <div class="player-avatar-fallback" style="display:none">${initials}</div>`
+          : `<div class="player-avatar-fallback">${initials}</div>`
+        }
       </div>
-      <div class="mw-info">
-        <div class="mw-name">${p.name || "TBD"}</div>
-        ${p.position ? `<div class="mw-pos">${p.position}</div>` : ""}
+      <div class="player-card-body">
+        <div class="player-ign">${p.name || "TBD"}</div>
+        ${p.role ? `<div class="player-realname">${p.role === "staff" ? p.position : p.role.toUpperCase()}</div>` : ""}
+        ${p.twitter ? `
+          <div class="player-socials">
+            <a href="https://x.com/${p.twitter}" target="_blank" class="psocial" title="Twitter/X">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            </a>
+          </div>` : ""}
       </div>
-      ${hasSocial ? `
-        <div class="mw-social-popup">
-          <a href="https://x.com/${p.twitter}" target="_blank" title="Twitter/X">
-            <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-          </a>
-        </div>` : ""}
     </div>`;
 }
 
