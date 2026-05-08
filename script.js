@@ -146,37 +146,6 @@ function toggleMenu() {
   if (nav && ham) { nav.classList.toggle("open"); ham.classList.toggle("active"); }
 }
 
-// ==========================================
-//  ROSTER: filtro + render
-// ==========================================
-function filterRoster(btn, role) {
-  document.querySelectorAll(".role-tab").forEach(b => b.classList.remove("active"));
-  btn.classList.add("active");
-  renderRoster(role);
-}
-
-function renderRoster(role = "all") {
-  const grid = document.getElementById("roster-grid");
-  if (!grid) return;
-
-  const filtered = role === "all" ? rosterData : rosterData.filter(p => p.role === role);
-
-  grid.innerHTML = filtered.map(p => `
-    <div class="roster-card" data-role="${p.role}">
-      <div class="rc-photo">
-        ${p.photo
-          ? `<img src="${p.photo}" alt="${p.name}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">`
-          : ""}
-        <span class="rc-initials" style="${p.photo ? 'display:none' : ''}">${p.name.charAt(0)}</span>
-      </div>
-      <div class="rc-info">
-        <span class="rc-role-badge">${p.role}</span>
-        <span class="rc-name">${p.name}</span>
-        <span class="rc-position">${p.position}</span>
-      </div>
-    </div>
-  `).join("");
-}
 
 // ==========================================
 //  RENDER PARTIDOS
