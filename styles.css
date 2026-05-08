@@ -741,30 +741,38 @@ section:nth-child(even) { background: var(--bg2); }
 }
 
 /* ===================== ACHIEVEMENTS ===================== */
-.ach-kpis {
+.pal-stats {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: 1px;
-  background: var(--border);
-  margin-bottom: 3rem;
+  background: var(--border2);
   border: 1px solid var(--border2);
+  margin-bottom: 3rem;
 }
-.ach-kpi {
+.pal-stat-card {
   background: var(--bg3);
-  padding: 2rem 1.5rem;
+  padding: 2.5rem 1.5rem;
   text-align: center;
   transition: background var(--tr);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
 }
-.ach-kpi:hover { background: var(--bg4); }
-.ach-kpi-num {
+.pal-stat-card:hover { background: var(--bg4); }
+.pal-stat-icon {
+  font-size: 1.8rem;
+  margin-bottom: 0.25rem;
+}
+.pal-stat-num {
   font-family: var(--font-title);
-  font-size: 2.8rem;
+  font-size: 3rem;
   font-weight: 900;
   color: var(--accent);
   line-height: 1;
-  margin-bottom: 0.4rem;
+  text-shadow: 0 0 20px rgba(57,255,20,0.3);
 }
-.ach-kpi-label {
+.pal-stat-label {
   font-family: var(--font-mono);
   font-size: 0.62rem;
   color: var(--text3);
@@ -772,64 +780,35 @@ section:nth-child(even) { background: var(--bg2); }
   text-transform: uppercase;
 }
 
-.ach-cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 1.5px;
-  background: var(--border);
+.pal-empty {
+  border: 1px dashed var(--border2);
+  padding: 4rem 2rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
 }
-.ach-card {
-  background: var(--bg3);
-  padding: 2rem;
-  position: relative;
-  overflow: hidden;
-  transition: background var(--tr);
+.pal-empty-icon {
+  font-size: 3rem;
+  opacity: 0.4;
 }
-.ach-card:hover { background: var(--bg4); }
-.ach-card::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0;
-  width: 3px; height: 100%;
-  background: var(--accent);
-}
-
-.ach-place {
-  font-family: var(--font-mono);
-  font-size: 0.65rem;
-  color: var(--text3);
-  letter-spacing: 0.25em;
-  text-transform: uppercase;
-  margin-bottom: 0.5rem;
-}
-.ach-trophy {
-  font-size: 1.8rem;
-  margin-bottom: 0.75rem;
-}
-.ach-title {
-  font-family: var(--font-title);
-  font-size: 1.2rem;
-  font-weight: 800;
-  color: var(--text);
-  margin-bottom: 0.3rem;
-}
-.ach-event {
-  font-size: 0.82rem;
-  color: var(--text2);
-  margin-bottom: 0.5rem;
-}
-.ach-prize {
+.pal-empty-title {
   font-family: var(--font-title);
   font-size: 1.4rem;
   font-weight: 900;
-  color: var(--accent);
-}
-.ach-year {
-  font-family: var(--font-mono);
-  font-size: 0.6rem;
-  color: var(--text3);
-  margin-top: 0.3rem;
   letter-spacing: 0.2em;
+  color: var(--text3);
+}
+.pal-empty-sub {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text3);
+  letter-spacing: 0.1em;
+}
+
+@media (max-width: 600px) {
+  .pal-stats { grid-template-columns: 1fr; }
 }
 
 /* ===================== ABOUT / TIMELINE ===================== */
