@@ -104,24 +104,26 @@ function renderRoster() {
 
   if (streamers.length > 0) {
     subs.innerHTML += `
-      <div class="mw-subsection">
-        <div class="mw-subsection-title">// Streamers Asociados</div>
-        <div class="mw-sub-grid">
-          ${streamers.map((p, i) => buildCard(p, i, "streamer-card")).join("")}
+
+       if (streamers.length > 0) {
+    subs.innerHTML += `
+      <div style="margin-top:3rem;">
+        <div class="section-eyebrow" style="margin-bottom:1.5rem;">// Streamers Asociados</div>
+        <div class="roster-grid">
+          ${streamers.map((p, i) => buildCard(p, i)).join("")}
         </div>
       </div>`;
   }
 
   if (direccion.length > 0) {
     subs.innerHTML += `
-      <div class="mw-subsection">
-        <div class="mw-subsection-title">// Dirección</div>
-        <div class="mw-sub-grid">
-          ${direccion.map((p, i) => buildCard(p, i, "staff-card")).join("")}
+      <div style="margin-top:3rem;">
+        <div class="section-eyebrow" style="margin-bottom:1.5rem;">// Dirección</div>
+        <div class="roster-grid">
+          ${direccion.map((p, i) => buildCard(p, i)).join("")}
         </div>
       </div>`;
   }
-}
 // ==========================================
 //  SPONSORS — edita aquí
 // ==========================================
