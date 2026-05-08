@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <meta name="description" content="DRAGONS — Equipo competitivo de Rainbow Six Siege."/>
 <title>DRAGONS — R6S Esports</title>
-<link rel="icon" type="image/png" href="logo.png"/>
+<link rel="icon" type="image/png" href="Logos/logo.png"/>
 <link rel="stylesheet" href="styles.css"/>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,300;0,600;0,700;0,900;1,700&family=Barlow:wght@300;400;500;600&family=Share+Tech+Mono&display=swap" rel="stylesheet">
@@ -18,7 +18,7 @@
 <div class="nav-inner">
 <a href="#hero" class="nav-logo">
 <div class="nav-logo-img">
-<img src="logo.png" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+<img src="Logos/logo.png" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
 <span class="logo-fallback">🐉</span>
 </div>
 <span class="nav-logo-text" id="nav-team-name">DRAGONS</span>
@@ -126,15 +126,7 @@ Discord
       <button class="res-filter" data-status="upcoming">Próximos</button>
     </div>
 
-    <div class="results-filter-row league-filters" id="league-filters" style="margin-top: 12px; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;">
-      <button class="res-filter active" data-league="all">Todas las Ligas</button>
-      <button class="res-filter" data-league="esp">
-        <img src="competicion_española.png" alt="" style="height: 16px; width: auto; margin-right: 6px; vertical-align: middle;" onerror="this.style.display='none'">
-        Competición Española
-      </button>
-      <button class="res-filter" data-league="liga2">Liga 2</button>
-      <button class="res-filter" data-league="liga3">Liga 3</button>
-    </div>
+    <div class="results-filter-row league-filters" id="league-filters" style="margin-top: 12px; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;"></div>
 
     <div id="matches-list" style="margin-top: 30px; display: flex; flex-direction: column; gap: 12px;"></div>
   </div>
@@ -265,10 +257,11 @@ Discord
 </div>
 </div>
 </footer>
-<script src="mvp-data.js"></script>
-<script src="script.js"></script>
 <script src="matches-data.js"></script>
 <script src="roster-data.js"></script>
 <script src="achievements-data.js"></script>
+<script src="sponsors-data.js"></script>
+<script src="mvp-data.js"></script>
+<script src="script.js"></script>
 </body>
 </html>

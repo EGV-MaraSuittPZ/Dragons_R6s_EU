@@ -1,11 +1,13 @@
 // ==========================================
 //  DATOS — cargados desde archivos externos
-//  · matches-data.js     → matchesData
-//  · roster-data.js      → rosterData
+//  · matches-data.js      → matchesData
+//  · roster-data.js       → rosterData
 //  · achievements-data.js → achievementsStats / achievementsList / achievementsEmpty
-//  · mvp-data.js         → mvpData
+//  · sponsors-data.js     → sponsorsData
+//  · mvp-data.js          → mvpData
 // ==========================================
-// ── Helpers ──────────────────────────────────────────────────────────────────
+
+// ── Helpers ───────────────────────────────────────────
 function getInitials(name) {
   if (!name) return "?";
   const parts = name.split(/[-_\s]/);
@@ -19,7 +21,7 @@ function buildCard(p, index, extraClass) {
   const initials = getInitials(p.name);
   const num = String(index + 1).padStart(2, "0");
   return `
-    <div class="mw-player-card ${extraClass}">
+    <div class="mw-player-card ${extraClass} reveal">
       ${p.position ? `<span class="mw-badge">${p.position}</span>` : ""}
       <span class="mw-num">${num}</span>
       <div class="mw-avatar">
@@ -43,6 +45,7 @@ function buildCard(p, index, extraClass) {
     </div>`;
 }
 
+// ── Roster ────────────────────────────────────────────
 function renderRoster() {
   const grid = document.getElementById("roster-grid");
   const subs = document.getElementById("roster-subsections");
@@ -77,32 +80,31 @@ function renderRoster() {
       </div>`;
   }
 }
-// ==========================================
-//  SPONSORS — edita aquí
-// ==========================================
-const sponsorsData = [
-  { name: "-", logo: "", description: "-", link: "", tag: "Patrocinador Principal" },
-];
 
-// ==========================================
-//  ESTADO FILTROS
-// ==========================================
+// ── MVP ───────────────────────────────────────────────
+function renderMvp() {
+  const grid = document.getElementById("mvp-grid");
+  if (!grid || !mvpData || mvpData.length === 0) return;
+  grid.innerHTML = mvpData.map(m => `
+    <div class="mvp-card${m.current ? " current" : ""} reveal">
+      ${m.current ? '<span class="mvp-badge-current">MVP ACTUAL</span>' : ''}
+      <div style="text-align:center;margin-bottom:6px;">
+        <span style="font-family:'Share Tech Mono',monospace;font-size:0.75rem;color:#888;">
+          ${m.month} ${m.year}
+        </span>
+      </div>
+      <img class="mvp-img" src="${m.image}" alt="${m.player}"
+        onerror="this.style.display='none'">
+      <div style="text-align:center;margin-top:10px;font-family:'Barlow Condensed',sans-serif;
+        font-weight:700;font-size:1.1rem;color:#fff;text-transform:uppercase;">${m.player}</div>
+    </div>
+  `).join("");
+}
+
+// ── Partidos ──────────────────────────────────────────
 let activeStatus = "all";
 let activeLeague = "all";
 
-// ==========================================
-//  MENÚ RESPONSIVE
-// ==========================================
-function toggleMenu() {
-  const nav = document.getElementById("nav-mobile");
-  const ham = document.getElementById("hamburger");
-  if (nav && ham) { nav.classList.toggle("open"); ham.classList.toggle("active"); }
-}
-
-
-// ==========================================
-//  RENDER PARTIDOS
-// ==========================================
 function renderMatches() {
   const container = document.getElementById("matches-list");
   if (!container) return;
@@ -123,11 +125,11 @@ function renderMatches() {
   filtered.forEach(match => {
     const isUpcoming  = match.status === "upcoming";
     const scoreText   = isUpcoming ? "VS" : `${match.ourScore} - ${match.opponentScore}`;
-    const borderColor = match.status === "win" ? "#2ecc71"
+    const borderColor = match.status === "win"  ? "#2ecc71"
                       : match.status === "loss" ? "#e74c3c" : "#3498db";
 
     const card = document.createElement("div");
-    card.className = `match-card ${match.status}`;
+    card.className = `match-card ${match.status} reveal`;
     card.style.cssText = `background:rgba(255,255,255,0.02);border-left:4px solid ${borderColor};
       padding:15px 20px;display:flex;flex-direction:column;gap:15px;
       border-radius:4px;transition:all 0.3s ease;`;
@@ -147,7 +149,7 @@ function renderMatches() {
         <div style="display:flex;align-items:center;gap:12px;flex:1;justify-content:flex-end;">
           <span style="color:#fff;font-family:'Barlow Condensed',sans-serif;font-weight:700;
             font-size:1.2rem;text-transform:uppercase;">DRAGONS</span>
-          <img src="logo.png" alt="" style="height:35px;width:35px;object-fit:contain;"
+          <img src="Logos/logo.png" alt="" style="height:35px;width:35px;object-fit:contain;"
             onerror="this.style.display='none'">
         </div>
         <div style="min-width:80px;text-align:center;">
@@ -174,14 +176,133 @@ function renderMatches() {
 
     container.appendChild(card);
   });
+
+  // re-observar las nuevas cards para la animación de entrada
+  observeReveal();
 }
 
-// ==========================================
-//  ARRANCA TODO — UN SOLO DOMContentLoaded
-// ==========================================
+// ── Filtros de liga dinámicos ─────────────────────────
+function buildLeagueFilters() {
+  const container = document.getElementById("league-filters");
+  if (!container) return;
+
+  const ligas = {};
+  matchesData.forEach(m => {
+    if (m.league && !ligas[m.league]) {
+      ligas[m.league] = { name: m.leagueName, logo: m.leagueLogo || "" };
+    }
+  });
+
+  const botones = Object.entries(ligas).map(([key, liga]) => `
+    <button class="res-filter" data-league="${key}">
+      ${liga.logo ? `<img src="${liga.logo}" alt="" style="height:16px;width:auto;margin-right:6px;vertical-align:middle;" onerror="this.style.display='none'">` : ""}
+      ${liga.name}
+    </button>
+  `).join("");
+
+  container.innerHTML = `
+    <button class="res-filter active" data-league="all">Todas las Ligas</button>
+    ${botones}
+  `;
+
+  container.querySelectorAll(".res-filter").forEach(btn => {
+    btn.addEventListener("click", () => {
+      container.querySelectorAll(".res-filter").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      activeLeague = btn.getAttribute("data-league");
+      renderMatches();
+    });
+  });
+}
+
+// ── Palmarés ──────────────────────────────────────────
+function renderAchievements() {
+  const statTorneos   = document.querySelector(".pal-stat-card:nth-child(1) .pal-stat-num");
+  const statGanancias = document.querySelector(".pal-stat-card:nth-child(2) .pal-stat-num");
+  if (statTorneos)   statTorneos.textContent   = achievementsStats.torneosGanados;
+  if (statGanancias) statGanancias.textContent = achievementsStats.ganancias;
+
+  const palEmpty = document.querySelector(".pal-empty");
+  if (!palEmpty) return;
+
+  if (achievementsList.length > 0) {
+    palEmpty.style.display = "none";
+    const lista = document.createElement("div");
+    lista.style.cssText = "display:flex;flex-direction:column;gap:16px;margin-top:24px;";
+    lista.innerHTML = achievementsList.map(a => `
+      <div class="match-card reveal" style="background:rgba(255,255,255,0.02);
+        border-left:4px solid #f1c40f;padding:15px 20px;border-radius:4px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;">
+          <div>
+            <span style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:1.2rem;
+              color:#fff;text-transform:uppercase;">${a.position} — ${a.title}</span>
+            <div style="font-family:'Share Tech Mono',monospace;font-size:0.8rem;color:#888;margin-top:4px;">
+              ${a.league} · ${a.date}
+            </div>
+            ${a.description ? `<div style="color:#aaa;font-size:0.9rem;margin-top:6px;">${a.description}</div>` : ""}
+          </div>
+          ${a.prize ? `<span style="font-family:'Share Tech Mono',monospace;color:#f1c40f;font-size:1rem;">${a.prize}</span>` : ""}
+        </div>
+      </div>
+    `).join("");
+    palEmpty.parentNode.insertBefore(lista, palEmpty);
+  } else {
+    const icon  = palEmpty.querySelector(".pal-empty-icon");
+    const title = palEmpty.querySelector(".pal-empty-title");
+    const sub   = palEmpty.querySelector(".pal-empty-sub");
+    if (icon)  icon.textContent  = achievementsEmpty.icon;
+    if (title) title.textContent = achievementsEmpty.title;
+    if (sub)   sub.textContent   = achievementsEmpty.subtitle;
+  }
+}
+
+// ── Sponsors ──────────────────────────────────────────
+function renderSponsors() {
+  const grid = document.getElementById("sponsors-grid");
+  if (!grid) return;
+  grid.innerHTML = sponsorsData.map(s => `
+    <div class="sponsor-card reveal">
+      <div class="sponsor-logo">
+        ${s.logo
+          ? `<img src="${s.logo}" alt="${s.name}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">`
+          : ""}
+        <span class="sponsor-initials" style="${s.logo ? "display:none" : ""}">${s.name.charAt(0)}</span>
+      </div>
+      <div class="sponsor-info">
+        <div class="sponsor-tag">${s.tag}</div>
+        <h3 class="sponsor-name">${s.name}</h3>
+        <p class="sponsor-desc">${s.description}</p>
+        ${s.link ? `<a href="${s.link}" target="_blank" class="sponsor-link">Visitar →</a>` : ""}
+      </div>
+    </div>
+  `).join("");
+}
+
+// ── Menú responsive ───────────────────────────────────
+function toggleMenu() {
+  const nav = document.getElementById("nav-mobile");
+  const ham = document.getElementById("hamburger");
+  if (nav && ham) { nav.classList.toggle("open"); ham.classList.toggle("active"); }
+}
+
+// ── Animaciones de entrada (reveal) ───────────────────
+function observeReveal() {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("visible");
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll(".reveal:not(.visible)").forEach(el => observer.observe(el));
+}
+
+// ── ARRANCA TODO ──────────────────────────────────────
 document.addEventListener("DOMContentLoaded", () => {
 
-  // Estadísticas automáticas
+  // Estadísticas hero con contador animado
   const jugados   = matchesData.filter(m => m.status === "win" || m.status === "loss");
   const victorias = jugados.filter(m => m.status === "win").length;
   const derrotas  = jugados.filter(m => m.status === "loss").length;
@@ -205,6 +326,7 @@ document.addEventListener("DOMContentLoaded", () => {
   contar("rec-players", rosterData.filter(p => p.role === "jugador").length);
   const elPlayed = document.getElementById("rec-played");
   if (elPlayed) elPlayed.textContent = jugados.length;
+
   // Ticker automático
   const ticker = document.getElementById("ticker-inner");
   if (ticker) {
@@ -217,30 +339,13 @@ document.addEventListener("DOMContentLoaded", () => {
     ticker.textContent = text + text;
   }
 
-  // Sponsors
-  const sponsorsGrid = document.getElementById("sponsors-grid");
-  if (sponsorsGrid) {
-    sponsorsGrid.innerHTML = sponsorsData.map(s => `
-      <div class="sponsor-card">
-        <div class="sponsor-logo">
-          ${s.logo ? `<img src="${s.logo}" alt="${s.name}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">` : ""}
-          <span class="sponsor-initials" style="${s.logo ? 'display:none' : ''}">${s.name.charAt(0)}</span>
-        </div>
-        <div class="sponsor-info">
-          <div class="sponsor-tag">${s.tag}</div>
-          <h3 class="sponsor-name">${s.name}</h3>
-          <p class="sponsor-desc">${s.description}</p>
-          ${s.link ? `<a href="${s.link}" target="_blank" class="sponsor-link">Visitar →</a>` : ""}
-        </div>
-      </div>
-    `).join("");
-  }
-
-  // Roster inicial
-  renderRoster("all");
-
-  // Partidos iniciales
+  // Render de todas las secciones
+  renderRoster();
+  renderMvp();
+  buildLeagueFilters();
   renderMatches();
+  renderAchievements();
+  renderSponsors();
 
   // Filtros de estado
   document.querySelectorAll("#status-filters .res-filter").forEach(btn => {
@@ -252,29 +357,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // Filtros de liga
-  document.querySelectorAll("#league-filters .res-filter").forEach(btn => {
-    btn.addEventListener("click", () => {
-      document.querySelectorAll("#league-filters .res-filter").forEach(b => b.classList.remove("active"));
-      btn.classList.add("active");
-      activeLeague = btn.getAttribute("data-league");
-      renderMatches();
-    });
-  });
-
+  // Animaciones de entrada
+  observeReveal();
 });
-
-// Añade esta función:
-function renderMvp() {
-  const grid = document.getElementById("mvp-grid");
-  if (!grid || !mvpData || mvpData.length === 0) return;
-  grid.innerHTML = mvpData.map(m => `
-    <div class="mvp-card${m.current ? " current" : ""}">
-      ${m.current ? '<span class="mvp-badge-current">MVP ACTUAL</span>' : ''}
-      <img class="mvp-img" src="${m.image}" alt="${m.player}">
-    </div>
-  `).join("");
-}
-
-// Dentro del DOMContentLoaded, añade:
-renderMvp();
