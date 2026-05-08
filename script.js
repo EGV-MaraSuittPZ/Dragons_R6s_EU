@@ -249,7 +249,8 @@ document.addEventListener("DOMContentLoaded", () => {
   contar("rec-losses",  derrotas);
   contar("rec-wr",      winRate, "%");
   contar("rec-players", rosterData.filter(p => p.role === "jugador").length);
-
+  const elPlayed = document.getElementById("rec-played");
+  if (elPlayed) elPlayed.textContent = jugados.length;
   // Ticker automático
   const ticker = document.getElementById("ticker-inner");
   if (ticker) {
