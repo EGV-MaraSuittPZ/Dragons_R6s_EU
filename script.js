@@ -39,11 +39,14 @@ const matchesData = [
 // ==========================================
  const rosterData = [
   // JUGADORES
-  { name: "GwrciaRetun",  role: "jugador",  position: "FLEX",    photo: "" },
-  { name: "Xx_Druiazul",  role: "jugador",  position: "IGL",     photo: "" },
-  { name: "GABYBEBEE",    role: "jugador",  position: "Support", photo: "Jugadores/Gabybebee.png" },
-  { name: "qSxntxxx",     role: "jugador",  position: "Rifler",  photo: ""  },
+  { name: "Xx_Druiazul",  role: "jugador",  position: "Capitan",     photo: "" },
+  { name: "GwrciaRetun",  role: "jugador",  position: "Sub-Capitan",    photo: "" },
+  { name: "GABYBEBEE",    role: "jugador",  position: "", photo: "Jugadores/Gabybebee.png" },
+  { name: "qSxntxxx",     role: "jugador",  position: "",  photo: ""  },
 
+    // STREAMERS
+  { name: "Buscando", role: "streamer", position: "Streamer", photo: ""},
+ 
   // DIRECCIÓN
   { name: "WZA-copeete",  role: "staff", position: "CEO", photo: "" },
   { name: "MaraSuitt_PZ", role: "staff", position: "CEO", photo: "" },
