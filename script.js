@@ -90,22 +90,19 @@ function buildCard(p, index) {
 
 function renderRoster() {
   const grid = document.getElementById("roster-grid");
-  const subs  = document.getElementById("roster-subsections");
+  const subs = document.getElementById("roster-subsections");
   if (!grid) return;
 
   const jugadores = rosterData.filter(p => p.role === "jugador" && p.name);
   const streamers = rosterData.filter(p => p.role === "streamer" && p.name);
   const direccion = rosterData.filter(p => p.role === "staff"    && p.name);
 
-  grid.innerHTML = jugadores.map((p, i) => buildCard(p, i, "")).join("");
+  grid.innerHTML = jugadores.map((p, i) => buildCard(p, i)).join("");
 
   if (!subs) return;
   subs.innerHTML = "";
 
   if (streamers.length > 0) {
-    subs.innerHTML += `
-
-       if (streamers.length > 0) {
     subs.innerHTML += `
       <div style="margin-top:3rem;">
         <div class="section-eyebrow" style="margin-bottom:1.5rem;">// Streamers Asociados</div>
@@ -124,6 +121,7 @@ function renderRoster() {
         </div>
       </div>`;
   }
+}
 // ==========================================
 //  SPONSORS — edita aquí
 // ==========================================
