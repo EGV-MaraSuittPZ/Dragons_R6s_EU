@@ -11,14 +11,14 @@ const rosterData = [
   // ── JUGADORES ──────────────────────────────────────────
   { name: "Xx_Druiazul",  role: "jugador", position: "Capitan",      photo: "" },
   { name: "GwrciaRetun",  role: "jugador", position: "Sub-Capitan",   photo: "" },
-  { name: "qSxntxxx",     role: "jugador", position: "",              photo: "" },
-  { name: "GABYBEBEE",    role: "jugador", position: "",              photo: "Jugadores/Gabybebee.png" },
-  { name: "cepsinn",     role: "jugador", position: "",              photo: "" },
-  { name: "Byj0s3g0nz",     role: "jugador", position: "",              photo: "" },
-  { name: "bichoraro454",     role: "jugador", position: "",              photo: "" },
-  { name: "retwrr",     role: "jugador", position: "",              photo: "" },
-  { name: "rczxo",     role: "jugador", position: "",              photo: "" },
-  { name: "Bananayoudemando",     role: "jugador", position: "",              photo: "" },
+  { name: "qSxntxxx",     role: "jugador", position: "jugador",              photo: "" },
+  { name: "GABYBEBEE",    role: "jugador", position: "jugador",              photo: "Jugadores/Gabybebee.png" },
+  { name: "cepsinn",     role: "jugador", position: "jugador",              photo: "" },
+  { name: "Byj0s3g0nz",     role: "jugador", position: "jugador",              photo: "" },
+  { name: "bichoraro454",     role: "jugador", position: "jugador",              photo: "" },
+  { name: "retwrr",     role: "jugador", position: "jugador",              photo: "" },
+  { name: "rczxo",     role: "jugador", position: "jugador",              photo: "" },
+  { name: "Bananayoudemando",     role: "jugador", position: "jugador",              photo: "" },
   
   // ── STREAMERS ──────────────────────────────────────────
   { name: "Buscando",     role: "streamer", position: "Streamer",     photo: "" },
