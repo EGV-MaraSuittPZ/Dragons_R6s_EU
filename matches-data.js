@@ -15,9 +15,9 @@
 const matchesData = [
   {
     opponent: "S.O.T", opponentLogo: "Logos/sot.png",
-    ourScore: 0, opponentScore: 0, status: "upcoming",
+    ourScore: 7, opponentScore: 5, status: "win",
     league: "esp", leagueName: "Competición Española",
-    leagueLogo: "competicion_española.png", date: "0 MAY, 2026"
+    leagueLogo: "competicion_española.png", date: "9 MAY, 2026"
   },
   {
     opponent: "(FW)ProdigiFive", opponentLogo: "Logos/p5.png",
