@@ -26,5 +26,5 @@ const rosterData = [
 
   // ── DIRECCIÓN ──────────────────────────────────────────
   { name: "WZA-copeete",  role: "staff",   position: "CEO",           photo: "Jugadores/copete.png" },
-  { name: "MaraSuitt_PZ", role: "staff",   position: "SUB-CEO",           photo: "Jugadores/.png" },
+  { name: "MaraSuitt_PZ", role: "staff",   position: "SUB-CEO",           photo: "Jugadores/marasuitt.png" },
 ];
