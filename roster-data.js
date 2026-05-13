@@ -25,6 +25,6 @@ const rosterData = [
   { name: "Buscando",     role: "streamer", position: "Streamer",     photo: "" },
 
   // ── DIRECCIÓN ──────────────────────────────────────────
-  { name: "WZA-copeete",  role: "staff",   position: "CEO",           photo: "" },
+  { name: "WZA-copeete",  role: "staff",   position: "CEO",           photo: "Jugadores/copete.png" },
   { name: "MaraSuitt_PZ", role: "staff",   position: "SUB-CEO",           photo: "" },
 ];
