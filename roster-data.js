@@ -9,22 +9,22 @@
 
 const rosterData = [
   // ── JUGADORES ──────────────────────────────────────────
-  { name: "Xx_Druiazul",  role: "jugador", position: "Capitan",      photo: "" },
-  { name: "GwrciaRetun",  role: "jugador", position: "Sub-Capitan",   photo: "" },
-  { name: "qSxntxxx",     role: "jugador", position: "jugador",              photo: "" },
+  { name: "Xx_Druiazul",  role: "jugador", position: "Capitan",      photo: "Jugadores/.png" },
+  { name: "GwrciaRetun",  role: "jugador", position: "Sub-Capitan",   photo: "Jugadores/.png" },
+  { name: "qSxntxxx",     role: "jugador", position: "jugador",              photo: "Jugadores/.png" },
   { name: "GABYBEBEE",    role: "jugador", position: "jugador",              photo: "Jugadores/Gabybebee.png" },
-  { name: "cepsinn",     role: "jugador", position: "jugador",              photo: "" },
-  { name: "Byj0s3g0nz",     role: "jugador", position: "jugador",              photo: "" },
-  { name: "bichoraro454",     role: "jugador", position: "jugador",              photo: "" },
-  { name: "retwrr",     role: "jugador", position: "jugador",              photo: "" },
-  { name: "rczxo",     role: "jugador", position: "jugador",              photo: "" },
+  { name: "cepsinn",     role: "jugador", position: "jugador",              photo: "Jugadores/.png" },
+  { name: "Byj0s3g0nz",     role: "jugador", position: "jugador",              photo: "Jugadores/.png" },
+  { name: "bichoraro454",     role: "jugador", position: "jugador",              photo: "Jugadores/.png" },
+  { name: "retwrr",     role: "jugador", position: "jugador",              photo: "Jugadores/.png" },
+  { name: "rczxo",     role: "jugador", position: "jugador",              photo: "Jugadores/.png" },
   { name: "FrshASG",     role: "jugador", position: "jugador",              photo: "Jugadores/Frshasg.png" },
-  { name: "Bananayoudemando",     role: "jugador", position: "jugador",              photo: "" },
+  { name: "Bananayoudemando",     role: "jugador", position: "jugador",              photo: "Jugadores/.png" },
   
   // ── STREAMERS ──────────────────────────────────────────
-  { name: "Buscando",     role: "streamer", position: "Streamer",     photo: "" },
+  { name: "Buscando",     role: "streamer", position: "Streamer",     photo: "Jugadores/.png" },
 
   // ── DIRECCIÓN ──────────────────────────────────────────
   { name: "WZA-copeete",  role: "staff",   position: "CEO",           photo: "Jugadores/copete.png" },
-  { name: "MaraSuitt_PZ", role: "staff",   position: "SUB-CEO",           photo: "" },
+  { name: "MaraSuitt_PZ", role: "staff",   position: "SUB-CEO",           photo: "Jugadores/.png" },
 ];
