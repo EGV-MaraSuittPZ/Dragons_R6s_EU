@@ -22,15 +22,20 @@ const achievementsStats = {
 //    prize       → premio en dinero u otro (ej: "200€") — opcional
 //    description → descripción breve — opcional
 const achievementsList = [
-  // Ejemplo (descomenta y edita cuando tengáis títulos):
-  // {
-  //   title: "Competición Española",
-  //   position: "1º",
-  //   date: "Junio 2026",
-  //   league: "Competición Española",
-  //   prize: "500€",
-  //   description: "Primera victoria oficial del equipo."
-  // },
+  {
+    title: "Competición Española",
+    position: "Top 16 (Octavos)",
+    date: "2026",
+    league: "Competición Española",
+    description: "Clasificados para octavos de final tras quedar segundos en la fase de grupos."
+  },
+  {
+    title: "King of Master J1",
+    position: "Participación",
+    date: "2026",
+    league: "King of Master",
+    description: "Primera jornada del King of Master."
+  },
 ];
 
 // ── Textos de la sección cuando no hay títulos ─────────
