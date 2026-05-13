@@ -18,6 +18,7 @@ const rosterData = [
   { name: "bichoraro454",     role: "jugador", position: "jugador",              photo: "" },
   { name: "retwrr",     role: "jugador", position: "jugador",              photo: "" },
   { name: "rczxo",     role: "jugador", position: "jugador",              photo: "" },
+  { name: "FrshASG",     role: "jugador", position: "jugador",              photo: "Jugadore/Frshasg.png" },
   { name: "Bananayoudemando",     role: "jugador", position: "jugador",              photo: "" },
   
   // ── STREAMERS ──────────────────────────────────────────
