@@ -9,7 +9,7 @@
 
 const rosterData = [
   // ── JUGADORES ──────────────────────────────────────────
-  { name: "Xx_Druiazul",  role: "jugador", position: "Capitan",      photo: "Jugadores/.png" },
+  { name: "Xx_Druiazul",  role: "jugador", position: "Capitan",      photo: "Jugadores/azulito.png" },
   { name: "GwrciaRetun",  role: "jugador", position: "Sub-Capitan",   photo: "Jugadores/.png" },
   { name: "qSxntxxx",     role: "jugador", position: "jugador",              photo: "Jugadores/.png" },
   { name: "GABYBEBEE",    role: "jugador", position: "jugador",              photo: "Jugadores/Gabybebee.png" },
