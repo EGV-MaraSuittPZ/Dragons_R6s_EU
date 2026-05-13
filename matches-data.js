@@ -14,7 +14,7 @@
 
 const matchesData = [
    {
-    opponent: "S.O.T", opponentLogo: "Logos/sot.png",
+    opponent: "Euskal", opponentLogo: "Logos/euskal.png",
     ourScore: 0, opponentScore: 0, status: "upcoming",
     league: "kom", leagueName: "King of Master",
     leagueLogo: "kom.png", date: "- MAY, 2026"
