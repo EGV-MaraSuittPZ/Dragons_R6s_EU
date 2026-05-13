@@ -13,6 +13,18 @@
 // ==========================================
 
 const matchesData = [
+   {
+    opponent: "S.O.T", opponentLogo: "Logos/sot.png",
+    ourScore: 0, opponentScore: 0, status: "upcoming",
+    league: "kom", leagueName: "King of Master",
+    leagueLogo: "kom.png", date: "- MAY, 2026"
+  },
+  {
+    opponent: "ProdigiFive", opponentLogo: "Logos/p5.png",
+    ourScore: 0, opponentScore: 0, status: "upcoming",
+    league: "esp", leagueName: "Competición Española",
+    leagueLogo: "competicion_española.png", date: "- MAY, 2026"
+  },
   {
     opponent: "S.O.T", opponentLogo: "Logos/sot.png",
     ourScore: 7, opponentScore: 5, status: "win",
